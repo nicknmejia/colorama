@@ -51,7 +51,7 @@
                  to contact customer service.</p>
             </div>
           </li>
-          <li><a href="#">Sign Out</a></li>
+          <li><a href="{{ URL::to('logout') }}">Logout</a></li>
         </ul>
       </section>
     </nav>
