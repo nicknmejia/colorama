@@ -1,36 +1,37 @@
 <?php
 
-class DashController extends \BaseController {
+class AvailController extends \BaseController {
 
 	/**
-	 * Display Login Page.
+	 * Display a listing of the resource.
 	 *
 	 * @return Response
 	 */
 	public function index()
 	{
-		return View::make('login');
+		//
 	}
 
 
 	/**
-	 * Show the dashboard.
+	 * Show the form for creating a new resource.
 	 *
-	 * @return Response
-	 */
-	public function dashboard()
-	{
-		return View::make('dashboard')->withUser("Nicholas");
-	}
-
-
-	/**
-	 * Generate a new order form for user!
 	 * @return Response
 	 */
 	public function create()
 	{
-		return View::make('orders.form')->withUser("Nicholas");
+		//
+	}
+
+
+	/**
+	 * Store a newly created resource in storage.
+	 *
+	 * @return Response
+	 */
+	public function store()
+	{
+		//
 	}
 
 
@@ -81,15 +82,5 @@ class DashController extends \BaseController {
 		//
 	}
 
-	/**
-	 * Create temp user.
-	 */
-	public function newuser()
-	{
-		$login = new User();
-		$login->user = "staff";
-		$login->password = Hash::make('password');
-		$login->save();
-		return "User created";
-	}
+
 }

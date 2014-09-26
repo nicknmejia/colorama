@@ -12,13 +12,13 @@
 */
 
 // Just in case someone lands on the home address
-Route::get('/', 'dashController@index');
+Route::get('/', 'DashController@index');
 
 // ============================================== //
 // =================== Login ==================== //
 // ============================================== //
 
-Route::get('login', 'dashController@index');
+Route::get('login', 'DashController@index');
 Route::post('login', 'HomeController@doLogin');
 
 // ============================================== //
@@ -32,9 +32,9 @@ Route::post('login', 'HomeController@doLogin');
 // All of the following routes require AT LEAST low-level auth
 Route::group(array('before' => 'auth'), function()
 {
-	Route::get('/dashboard', 'dashController@dashboard');
-	Route::get('/createuser', 'dashController@newuser');
-	Route::get('/form', 'dashController@create');
+	Route::get('/dashboard', 'DashController@dashboard');
+	Route::get('/createuser', 'DashController@newuser');
+	Route::get('/form', 'DashController@create');
 });
 
 // ============================================== //
