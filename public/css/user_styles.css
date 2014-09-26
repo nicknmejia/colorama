@@ -1,0 +1,69 @@
+
+
+.bar-push{
+	margin-top:70px;
+}
+
+.login{
+	margin-top: 25%;
+	max-width: 60%;
+}
+
+#drop1 a{
+	background-color: white;
+	padding: 0 0;
+	margin: 0 0;
+}
+
+.tabs-content{
+	border: 1px black solid;
+}
+.tab-title{
+	color: brown;
+}
+
+.fi-pencil, .fi-magnifying-glass, .fi-torso, .fi-home, .fi-clipboard-pencil, .fi-print, .fi-torsos-all, .fi-wrench, .fi-plus, .fi-mail{
+	font-size: 4em;
+}
+
+.fi-clipboard-notes{
+	font-size: 6em;
+}
+
+.centered{
+	text-align: center;
+	margin-bottom: 10px;
+}
+
+.auto-margin{
+	margin: auto;
+}
+
+.ord{
+	font-size: 4em;
+}
+.space{
+	margin-top: 50px;
+}
+
+.small-margin{
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+.large-margin{
+	margin-top: 30px;
+	margin-bottom: 30px;
+}
+
+div.ui-datepicker{
+ font-size:12.6px;
+}
+
+.categories input[type="checkbox"]{
+	margin: 0px;
+}
+
+.category table tr td{
+	padding:0px;
+}
