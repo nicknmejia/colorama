@@ -12,7 +12,7 @@ class UserController extends \BaseController {
 		// 1. Add key that checks if user has admin privelages
 
 		// 2. if(admin_is_set) Return list of users
-		return View::make('admins.edit_users');
+		return View::make('admin.edit_users');
 
 		// 2. else reroute user to dashboard
 	}
