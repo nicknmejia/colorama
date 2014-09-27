@@ -3,13 +3,13 @@
 class OrderController extends \BaseController {
 
 	/**
-	 * Display a listing of the resource.
+	 * Display a new form
 	 *
 	 * @return Response
 	 */
 	public function index()
 	{
-		//
+		return View::make('orders.form')->withUser("Nicholas");
 	}
 
 
@@ -20,7 +20,7 @@ class OrderController extends \BaseController {
 	 */
 	public function create()
 	{
-		//
+		return View::make('orders.form')->withUser("Nicholas");
 	}
 
 
@@ -36,14 +36,14 @@ class OrderController extends \BaseController {
 
 
 	/**
-	 * Display the specified resource.
+	 * Display the current users orders
 	 *
 	 * @param  int  $id
 	 * @return Response
 	 */
 	public function show($id)
 	{
-		//
+		return View::make('orders.view_orders');
 	}
 
 
