@@ -30,7 +30,7 @@
         <ul class="title-area">
           <li class="name">
             <h1>
-              <a href="#">Colorama Online - Dashboard</a>
+              <a href="{{ URL::to('dashboard') }}">Colorama Online - Dashboard</a>
             </h1>
           </li>
           
@@ -42,7 +42,7 @@
       
       <section class="top-bar-section">
         <ul class="right">
-          <li><a href="#">Home</a></li>
+          <li><a href="{{ URL::to('dashboard') }}">Home</a></li>
           <li>
             <a href="#" data-dropdown="drop1">Help</a>
             <div id="drop1" data-dropdown-content class="f-dropdown content">
