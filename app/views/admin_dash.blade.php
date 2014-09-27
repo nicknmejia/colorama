@@ -6,7 +6,7 @@
   <div class="row panel bar-push">
     <div class="large-5 columns">
       <br/>
-      <h1>Welcome USER</h1>
+      <h1>Welcome {{{ $user }}}</h1>
       <p>Today's Date: 8/26/2014</p> <!-- Use PHP date function on this line -->
       <p>Server Time: 11:59:22 A.M</p> <!-- Grab server time and echo it live -->
     </div>
