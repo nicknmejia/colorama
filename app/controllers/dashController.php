@@ -22,13 +22,20 @@ class DashController extends \BaseController {
 	{
 		$name = Auth::user()->name;
 		$admin = Auth::user()->admin;
+		$id = Auth::id();
 		if($admin === "YES")
 		{
-			return View::make('admin_dash')->withUser($name);
+			return View::make('admin_dash')
+				->withUser($name)
+				->withId($id)
+				->withAdmin($admin);
 		}
 		elseif($admin === "NO")
 		{
-			return View::make('dashboard')->withUser($name);
+			return View::make('dashboard')
+				->withUser($name)
+				->withId($id)
+				->withAdmin($admin);
 		}
 		else
 		{
