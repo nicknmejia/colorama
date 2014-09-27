@@ -20,17 +20,21 @@ class DashController extends \BaseController {
 	 */
 	public function dashboard()
 	{
-		return View::make('dashboard')->withUser("Nicholas");
-	}
+		$name = Auth::user()->name;
+		$admin = Auth::user()->admin;
+		if($admin === "YES")
+		{
+			return View::make('admin_dash')->withUser($name);
+		}
+		elseif($admin === "NO")
+		{
+			return View::make('dashboard')->withUser($name);
+		}
+		else
+		{
+			return View::make('login');
+		}
 
-
-	/**
-	 * Generate a new order form for user!
-	 * @return Response
-	 */
-	public function create()
-	{
-		return View::make('orders.form')->withUser("Nicholas");
 	}
 
 
