@@ -28,9 +28,9 @@
     <fieldset>
       <legend>Your Tools</legend>
       <div class="row centered">
-        <a href="#"><div class="small-12 medium-4 large-4 columns"><i class="fi-pencil"></i><br/>Place an Order</div></a>
-        <a href="#"><div class="small-12 medium-4 large-4 columns"><i class="fi-magnifying-glass"></i><br/>View All Orders</div></a>
-        <a href="#"><div class="small-12 medium-4 large-4 columns"><i class="fi-torsos-all"></i><br/>Edit Accounts</div></a>
+        <a href="{{ URL::to('orders/create') }}"><div class="small-12 medium-4 large-4 columns"><i class="fi-pencil"></i><br/>Place an Order</div></a>
+        <a href="{{ URL::to('orders/show') }}"><div class="small-12 medium-4 large-4 columns"><i class="fi-magnifying-glass"></i><br/>View Your Orders</div></a>
+        <a href="{{ URL::to('users') }}"><div class="small-12 medium-4 large-4 columns"><i class="fi-torsos-all"></i><br/>Edit Accounts</div></a>
       </div>
       <div class="row centered">
         <a href="#"><div class="small-12 medium-4 large-4 columns bar-push"><i class="fi-clipboard-pencil"></i><br/>Edit Availability</div></a>
