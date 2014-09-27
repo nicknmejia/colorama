@@ -34,7 +34,8 @@ Route::group(array('before' => 'auth'), function()
 {
 	Route::get('/dashboard', 'DashController@dashboard');
 	Route::get('/createuser', 'DashController@newuser');
-	Route::get('/form', 'DashController@create');
+	Route::resource('orders','OrderController');
+	Route::resource('users','UserController');
 });
 
 // ============================================== //
