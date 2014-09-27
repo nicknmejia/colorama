@@ -9,7 +9,7 @@ class OrderController extends \BaseController {
 	 */
 	public function index()
 	{
-		return View::make('orders.form')->withUser("Nicholas");
+	
 	}
 
 
@@ -20,7 +20,7 @@ class OrderController extends \BaseController {
 	 */
 	public function create()
 	{
-		return View::make('orders.form')->withUser("Nicholas");
+		return View::make('orders.form');
 	}
 
 
