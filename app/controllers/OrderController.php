@@ -20,22 +20,13 @@ class OrderController extends \BaseController {
 	 */
 	public function create()
 	{
-		$products = array();
-		$to_list = array();
-		$tables = DB::select('select * from information_schema.tables where table_schema="coloramaorders"');
+
+		$tables = DB::table('categories')->get();
 		$table_count = count($tables);
 
-		for($i = 0;$i < $table_count; $i++){
-			//array_push($products, $tables[$i]->TABLE_NAME);
-			if($tables[$i]->TABLE_NAME != "users" && $tables[$i]->TABLE_NAME != "migrations"){
-				array_push($products, $tables[$i]->TABLE_NAME);
-				$to_list[$tables[$i]->TABLE_NAME] = DB::table($tables[$i]->TABLE_NAME)->get(); 
-			}
-			else{}
-		}
 
 		return View::make('orders.form')
-			->withTo_list($to_list);
+			->withTables($tables);
 	}
 
 
