@@ -71,8 +71,8 @@
 	<div class="row panel item-selections">
 	  <p>Please click/tap the categories you would like to enter quantities from:</p>
 	    <div class="row panel category" id="p808-tab">
-	      <div class="row panel item-selections" id="p808">
-	        <label for="pak808">808 Paks</label>
+	      <div class="row panel item-selections">
+	        <label for="pak808"  id="p808" >808 Paks</label>
 	        <table class="large-12 columns table" id="pak808">
 	          <thead>
 	            <tr>
@@ -86,38 +86,15 @@
 	            <td>Alyssum White</td>
 	            <td><input type="text"></td>
 	          </tr>
-	          <tr>
-	            <td>1001</td>
-	            <td>Begonia Green Mix</td>
-	            <td><input type="text"></td>
-	          </tr>
-	          <tr>
-	            <td>1002</td>
-	            <td>Begonia Red Mix</td>
-	            <td><input type="text"></td>
-	          </tr>
-	          <tr>
-	            <td>1003</td>
-	            <td>Caladium White</td>
-	            <td><input type="text"></td>
-	          </tr>
-	          <tr>
-	            <td>1004</td>
-	            <td>Dianthus Telstar Mix</td>
-	            <td><input type="text"></td>
-	          </tr>
-	          <tr>
-	            <td>1005</td>
-	            <td>Gomphrena Buddy Purple</td>
-	            <td><input type="text"></td>
-	          </tr>
+	          
+
 	        </table>
 	      </div>
 	    </div>
 
 	    <div class="row panel category" id="p806-tab">
-	      <div class="row panel item-selections" id="p806">
-	        <label for="pak806">806 Paks</label>
+	      <div class="row panel item-selections">
+	        <label for="pak806" id="p806">806 Paks</label>
 	        <table class="large-12 columns table" id="pak806">
 	          <thead>
 	            <tr>
@@ -131,38 +108,13 @@
 	            <td>Alyssum White</td>
 	            <td><input type="text"></td>
 	          </tr>
-	          <tr>
-	            <td>1001</td>
-	            <td>Begonia Green Mix</td>
-	            <td><input type="text"></td>
-	          </tr>
-	          <tr>
-	            <td>1002</td>
-	            <td>Begonia Red Mix</td>
-	            <td><input type="text"></td>
-	          </tr>
-	          <tr>
-	            <td>1003</td>
-	            <td>Caladium White</td>
-	            <td><input type="text"></td>
-	          </tr>
-	          <tr>
-	            <td>1004</td>
-	            <td>Dianthus Telstar Mix</td>
-	            <td><input type="text"></td>
-	          </tr>
-	          <tr>
-	            <td>1005</td>
-	            <td>Gomphrena Buddy Purple</td>
-	            <td><input type="text"></td>
-	          </tr>
 	        </table>
 	      </div>
 	    </div>
 
 	    <div class="row panel category" id="f-inch-tab">
-	      <div class="row panel item-selections" id="f-inch">
-	        <label for="four-inch">4" Color</label>
+	      <div class="row panel item-selections">
+	        <label for="four-inch" id="f-inch">4" Color</label>
 	        <table class="large-12 columns table" id="four-inch">
 	          <thead>
 	            <tr>
@@ -176,31 +128,6 @@
 	            <td>Alyssum White</td>
 	            <td><input type="text"></td>
 	          </tr>
-	          <tr>
-	            <td>1001</td>
-	            <td>Begonia Green Mix</td>
-	            <td><input type="text"></td>
-	          </tr>
-	          <tr>
-	            <td>1002</td>
-	            <td>Begonia Red Mix</td>
-	            <td><input type="text"></td>
-	          </tr>
-	          <tr>
-	            <td>1003</td>
-	            <td>Caladium White</td>
-	            <td><input type="text"></td>
-	          </tr>
-	          <tr>
-	            <td>1004</td>
-	            <td>Dianthus Telstar Mix</td>
-	            <td><input type="text"></td>
-	          </tr>
-	          <tr>
-	            <td>1005</td>
-	            <td>Gomphrena Buddy Purple</td>
-	            <td><input type="text"></td>
-	          </tr>
 	        </table>
 	      </div>
 	    </div>
@@ -211,6 +138,7 @@
 	    </div>
 	    <div class="large-6 columns">
 	        <input type="submit" class="left" value="Next">
+	        <p> }}}</p>
 	    </div>
 	  </div>
 

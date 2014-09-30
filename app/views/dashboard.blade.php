@@ -1,4 +1,3 @@
-<?php  $page = "Dashboard";  ?>
 @extends('layouts.main')
 @section('content')
 	
