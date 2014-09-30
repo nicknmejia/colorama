@@ -60,6 +60,21 @@
     </fieldset>
   </div>
 
+<div class="row panel territory">
+  <p>Which Territory's availability are you changing?</p>
+  <div class="large-6 small-1 columns">
+    {{ Form::radio('territory', 'south') }}
+    {{ Form::label('south','Southern California') }}<br/>
+    {{ Form::radio('territory', 'north') }}
+    {{ Form::label('north','Northern California') }}<br/>
+  </div>
+
+  <div class="large-6 small-1 columns">
+    
+  </div>
+
+</div>
+
 <div class="row panel categories bar-push">
   <p>Please select the categories you wish to add to:</p>
     <div class="large-3 small-12 columns">

@@ -11,7 +11,7 @@
             <th width="">UserID</th>
             <th width="">First Name</th>
             <th width="">Last Name</th>
-            <th width="">Email</th>
+            <th width="200">Email</th>
             <th width="">Territory</th>
             <th width="">Admin?</th>
             <th width="">Edit</th>

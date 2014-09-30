@@ -1,3 +1,4 @@
+<?php  $page = "Dashboard";  ?>
 @extends('layouts.main')
 @section('content')
 	
@@ -41,7 +42,7 @@
       <table class="large-12 columns">
         <thead>
           <tr>
-            <th width="20">OO#</th>
+            <th width="50">OO#</th>
             <th width="250" class="hide-for-small">Ordered</th>
             <th width="">Ship Date</th>
             <th width="" class="hide-for-small">Store</th>

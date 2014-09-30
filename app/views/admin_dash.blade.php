@@ -33,7 +33,7 @@
         <a href="{{ URL::to('users') }}"><div class="small-12 medium-4 large-4 columns"><i class="fi-torsos-all"></i><br/>Edit Accounts</div></a>
       </div>
       <div class="row centered">
-        <a href="#"><div class="small-12 medium-4 large-4 columns bar-push"><i class="fi-clipboard-pencil"></i><br/>Edit Availability</div></a>
+        <a href="{{ URL::to('availability/create') }}"><div class="small-12 medium-4 large-4 columns bar-push"><i class="fi-clipboard-pencil"></i><br/>Edit Availability</div></a>
         <a href="#"><div class="small-12 medium-4 large-4 columns bar-push"><i class="fi-print"></i><br/>Print Totals</div></a>
         <a href="{{ URL::to('/tools') }}"><div class="small-12 medium-4 large-4 columns bar-push"><i class="fi-wrench"></i><br/>More Tools</div></a>
       </div>
@@ -50,7 +50,7 @@
       <table class="large-12 columns">
         <thead>
           <tr>
-            <th width="20">OO#</th>
+            <th width="50">OO#</th>
             <th width="250" class="hide-for-small">Ordered</th>
             <th width="">Ship Date</th>
             <th width="" class="hide-for-small">Store</th>

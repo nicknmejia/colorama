@@ -3,29 +3,29 @@
 class AvailController extends \BaseController {
 
 	/**
-	 * Display a listing of the resource.
+	 * Display a listing from availability.
 	 *
 	 * @return Response
 	 */
 	public function index()
 	{
-		//
+		return View::make('avail.avail_printout');
 	}
 
 
 	/**
-	 * Show the form for creating a new resource.
+	 * Show the form for creating a new availability.
 	 *
 	 * @return Response
 	 */
 	public function create()
 	{
-		//
+		return View::make('avail.availability');
 	}
 
 
 	/**
-	 * Store a newly created resource in storage.
+	 * Store a newly created item.
 	 *
 	 * @return Response
 	 */
@@ -36,48 +36,48 @@ class AvailController extends \BaseController {
 
 
 	/**
-	 * Display the specified resource.
+	 * Display the specified items from the availability.
 	 *
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function show($id)
+	public function show($territory)
 	{
 		//
 	}
 
 
 	/**
-	 * Show the form for editing the specified resource.
+	 * Show the form for editing something else possibly
 	 *
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function edit($id)
+	public function edit($territory)
 	{
 		//
 	}
 
 
 	/**
-	 * Update the specified resource in storage.
+	 * Update the availability.
 	 *
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update($id)
+	public function update($territory)
 	{
 		//
 	}
 
 
 	/**
-	 * Remove the specified resource from storage.
+	 * Remove the specified item from the avail.
 	 *
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function destroy($id)
+	public function destroy($territory)
 	{
 		//
 	}

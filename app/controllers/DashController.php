@@ -23,19 +23,22 @@ class DashController extends \BaseController {
 		$name = Auth::user()->name;
 		$admin = Auth::user()->admin;
 		$id = Auth::id();
+		$territory = Auth::user()->territory;
 		if($admin === "YES")
 		{
 			return View::make('admin_dash')
 				->withUser($name)
 				->withId($id)
-				->withAdmin($admin);
+				->withAdmin($admin)
+				->withTerritory($territory);
 		}
 		elseif($admin === "NO")
 		{
 			return View::make('dashboard')
 				->withUser($name)
 				->withId($id)
-				->withAdmin($admin);
+				->withAdmin($admin)
+				->withTerritory($territory);
 		}
 		else
 		{
