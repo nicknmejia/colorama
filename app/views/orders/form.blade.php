@@ -74,7 +74,6 @@
 
 	<div class="row panel item-selections">
 	  <p>Please click/tap the categories you would like to enter quantities from:</p>
-	    
 
 	  @foreach($tables as $category)
 
