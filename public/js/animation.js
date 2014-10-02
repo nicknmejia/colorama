@@ -30,7 +30,7 @@ $( "#checkbox6" ).change(function() {
 	});
 
 $( "#checkbox7" ).change(function() {
-	  $( "#gallon-tab" ).fadeToggle( "fast" );
+	  $( "#gallons-tab" ).fadeToggle( "fast" );
 	});
 
 $( "#checkbox8" ).change(function() {
@@ -145,8 +145,8 @@ $( "#quarts" ).click(function() {
 	  $( "#quarts-click" ).fadeToggle( "fast" );
 	});
 
-$( "#gallon" ).click(function() {
-	  $( "#gallon-click" ).fadeToggle( "fast" );
+$( "#gallons" ).click(function() {
+	  $( "#gallons-click" ).fadeToggle( "fast" );
 	});
 
 $( "#cyclamen" ).click(function() {

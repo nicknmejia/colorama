@@ -74,7 +74,7 @@
 
 	<div class="row panel item-selections">
 	  <p>Please click/tap the categories you would like to enter quantities from:</p>
-
+	  <?php $c = 0; ?>
 	  @foreach($tables as $category)
 
 	  	<div class="row panel category" id="{{{ $category->table }}}-tab">
@@ -88,16 +88,17 @@
 	              <th>Qty</th>
 	            </tr>
 	          </thead>
-	          <tr>
-	            <td>1000</td>
-	            <td>Alyssum White</td>
-	            <td><input type="text"></td>
-	          </tr>
+	          	@for($i = 0; $i < count($items[$c]); $i++)
+		          <tr>
+		            <td>{{{ $items[$c][$i]->id }}}</td>
+		            <td>{{{ $items[$c][$i]->description }}}</td>
+		            <td><input type="text" name=""></td>
+		          </tr>
+		        @endfor
 	        </table>
 	      </div>
 	    </div>
-
-
+	  <?php $c++; ?>
 	  @endforeach
 
 
@@ -108,7 +109,6 @@
 	        <input type="submit" class="left" value="Next">
 	    </div>
 	  </div>
-
 
 
 	</form>

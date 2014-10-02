@@ -23,10 +23,17 @@ class OrderController extends \BaseController {
 
 		$tables = DB::table('categories')->get();
 		$table_count = count($tables);
-
+		$items = array();
+		$count = 0;
+		foreach($tables as $category){
+			array_push($items, DB::table($category->table)->get());
+		}
 
 		return View::make('orders.form')
-			->withTables($tables);
+			->withTables($tables)
+			->withItems($items)
+			->withCount($count)
+			->withTable_count($table_count);
 	}
 
 
