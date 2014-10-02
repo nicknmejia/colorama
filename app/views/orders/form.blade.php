@@ -92,7 +92,7 @@
 		          <tr>
 		            <td>{{{ $items[$c][$i]->id }}}</td>
 		            <td>{{{ $items[$c][$i]->description }}}</td>
-		            <td><input type="text" name=""></td>
+		            <td><input type="text" name="{{{ $items[$c][$i]->id }}}"></td>
 		          </tr>
 		        @endfor
 	        </table>
