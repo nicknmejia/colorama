@@ -1,7 +1,7 @@
 @extends('layouts.main')
 @section('content')
 	<!-- Start Order Form Panel -->
-	<form>
+	{{ Form::open(array('action' => 'OrderController@review')) }}
 	<div class="row panel">
 	  <p>Please fill out the required information in the fields below:</p>
 	  <div class="large-3 columns">
@@ -111,7 +111,7 @@
 	  </div>
 
 
-	</form>
+	{{ Form::close() }}
 	<!-- End Order Form Panel -->
 
 	

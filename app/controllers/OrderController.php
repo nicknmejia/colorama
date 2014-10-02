@@ -36,6 +36,16 @@ class OrderController extends \BaseController {
 			->withTable_count($table_count);
 	}
 
+	/**
+	 * Review your order before storing it.
+	 *
+	 * @return Response
+	 */
+	public function review()
+	{
+		return View::make('orders.review');
+	}
+
 
 	/**
 	 * Store a newly created resource in storage.

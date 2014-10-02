@@ -37,6 +37,7 @@ Route::group(array('before' => 'auth'), function()
 	Route::get('/dashboard', 'DashController@dashboard');
 	Route::get('/createuser', 'DashController@newuser');
 	Route::get('/tools', 'DashController@more');
+	Route::post('/review', 'OrderController@review');
 	
 	// RESTful routes!  Huzzah!
 	Route::resource('orders','OrderController');
