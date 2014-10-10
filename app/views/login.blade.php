@@ -10,8 +10,8 @@
           <!-- Errors will display here -->
 
           <p>
-            {{ $errors->first('user') }}
-            {{ $errors->first('pass') }}
+            {{ $errors->first('user') . "<br/>" }}
+            {{ $errors->first('pass') . "<br/>" }}
           </p>
 
           <!--==========================-->

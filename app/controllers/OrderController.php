@@ -43,7 +43,41 @@ class OrderController extends \BaseController {
 	 */
 	public function review()
 	{
-		return View::make('orders.review');
+
+		$rules = array(
+		'fname'     => 'required',
+		'lname'     => 'required',
+		'email'     => 'required|email',
+		'sname'	    => 'required',
+		'snum'      => 'required|numeric',
+		'territory' => 'required',
+		'date'      => 'required|date',
+		'organic'   => 'required'
+	);
+
+		$messages = array(
+    	'fname.required'     => '<li>Your first name is required</li>',
+		'lname.required'     => '<li>Your last name is required</li>',
+		'email.required'     => '<li>You must enter an email adress</li>',
+		'email.email'        => '<li>You must enter a vaild email adress</li>',
+		'sname.required'	 => '<li>The store name is required</li>',
+		'snum.required'      => '<li>You must enter a store number</li>',
+		'snum.numeric'       => '<li>A valid store number is required</li>',
+		'territory.required' => '<li>Please select a territory</li>',
+		'date.required'      => '<li>Please select a date</li>',
+		'date.date'          => '<li>A valid date is required</li>',
+		'organic.required'   => '<li>Please indicate whether or not an organic order is required</li>'	
+	);
+
+		$validator = Validator::make(Input::all(), $rules, $messages);
+
+		if($validator->fails()){
+			return Redirect::to('orders/create')
+			->withErrors($validator);
+		}
+		else{
+			return View::make('orders.review');
+			}
 	}
 
 

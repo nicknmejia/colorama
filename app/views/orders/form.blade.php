@@ -5,30 +5,42 @@
 	<div class="row panel">
 	  <p>Please fill out the required information in the fields below:</p>
 	  <div class="large-3 columns">
-	    <input type="text" placeholder="First Name">
-	    <input type="text" placeholder="Last Name">
-	    <input type="text" placeholder="Email">
+	    <input type="text" placeholder="First Name" name="fname">
+	    <input type="text" placeholder="Last Name" name="lname">
+	    <input type="text" placeholder="Email" name="email">
 	  </div>
 	  <div class="large-3 columns">
-	    <input type="text" placeholder="Store Name">
-	    <input type="text" placeholder="Store #">
-	        <select>
-	          <option value="empty">Select Territory</option>
+	    <input type="text" placeholder="Store Name" name="sname">
+	    <input type="text" placeholder="Store #" name="snum">
+	        <select name="territory">
+	          <option value="" disabled selected>Select Territory</option>
 	          <option value="south">South</option>
 	          <option value="north">North</option>
 	          <option value="napa">Napa/Sonoma</option>
 	        </select>
 	  </div>
 	  <div class="large-3 columns">
-    <input type="text" id="datepicker">
+    <input type="text" id="datepicker" placeholder="Date" name="date">
   </div>
 	  <div class="large-3 columns">
-	    <textarea placeholder="Special Instructions"></textarea>
+	    <textarea placeholder="Special Instructions" name="sinstruct"></textarea>
 	    <div class="large-12 small-12 columns">
 	      <label>Include an Organic Order?</label>
-	      <input type="radio" name="pokemon" value="Red" id="pokemonRed"><label for="pokemonRed">Yes</label>
-	      <input type="radio" name="pokemon" value="Blue" id="pokemonBlue"><label for="pokemonBlue">No</label>
+	      <input type="radio" name="organic" value="yes" id="yes"><label for="yes">Yes</label>
+	      <input type="radio" name="organic" value="no" id="yes"><label for="yes">No</label>
 	    </div>
+	  </div>
+	  <div class="large-12 columns">
+	  	<ul class="errors">
+	  	{{ $errors->first('fname') }}
+	  	{{ $errors->first('lname') }}
+	  	{{ $errors->first('email') }}
+	  	{{ $errors->first('sname') }}
+	  	{{ $errors->first('snum') }}
+	  	{{ $errors->first('territory') }}
+	  	{{ $errors->first('date') }}
+	  	{{ $errors->first('organic') }}
+	    </ul>
 	  </div>
 	</div>
 
@@ -106,7 +118,7 @@
 	    <div class="large-6 columns">
 	    </div>
 	    <div class="large-6 columns">
-	        <input type="submit" class="left" value="Next">
+	        {{ Form::submit('Next') }}
 	    </div>
 	  </div>
 

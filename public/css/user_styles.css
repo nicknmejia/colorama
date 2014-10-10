@@ -67,3 +67,7 @@ div.ui-datepicker{
 .category table tr td{
 	padding:0px;
 }
+
+.errors li{
+	color:red;
+}
