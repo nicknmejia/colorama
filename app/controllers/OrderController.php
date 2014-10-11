@@ -3,7 +3,7 @@
 class OrderController extends \BaseController {
 
 	/**
-	 * Display a new form
+	 * Display a new something.  I don't think I need the index route.
 	 *
 	 * @return Response
 	 */
@@ -36,6 +36,18 @@ class OrderController extends \BaseController {
 			->withTable_count($table_count);
 	}
 
+
+	/**
+	 * Create an organic order as well
+	 *
+	 * @return Response
+	 */
+	public function organic()
+	{
+		return View::make('orders.organics');
+	}
+
+
 	/**
 	 * Review your order before storing it.
 	 *
@@ -43,6 +55,16 @@ class OrderController extends \BaseController {
 	 */
 	public function review()
 	{
+
+		$organic = Input::get('organic');
+
+		if($organic === "yes"){
+			return Redirect::to('orders/organics');
+			/**
+				* DONT FORGET TO PASS THE ARRAYS GENERATED FROM YOUR ORDER
+				* WITH THE VIEW TRANSFER.  YOU NEED THOSE STILL...DUMBASS
+			*/
+		}
 
 		$rules = array(
 		'fname'     => 'required',
