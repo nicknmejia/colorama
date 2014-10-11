@@ -32,13 +32,13 @@ Route::post('login', 'HomeController@doLogin');
 // All of the following routes require AT LEAST low-level auth
 Route::group(array('before' => 'auth'), function()
 {
-	// Non-resourced routes for the dash.  Until you can think of
+	// Non-resourced routes for the dash and order forms.  Until you can think of
 	// a better way to do this, this will have to do
 	Route::get('/dashboard', 'DashController@dashboard');
 	Route::get('/createuser', 'DashController@newuser');
 	Route::get('/tools', 'DashController@more');
 	Route::post('/review', 'OrderController@review');
-	Route::get('/orders/organics', 'OrderController@organic');
+	Route::post('/orders/organics', 'OrderController@organic');
 	
 	// RESTful routes!  Huzzah!
 	Route::resource('orders','OrderController');

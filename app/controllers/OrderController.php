@@ -44,6 +44,10 @@ class OrderController extends \BaseController {
 	 */
 	public function organic()
 	{
+		$userdata = Session::get('userdata');
+		$userdata['organic'] = "ok";
+		Session::put('userdata',$userdata);
+
 		return View::make('orders.organics');
 	}
 
@@ -57,6 +61,18 @@ class OrderController extends \BaseController {
 	{
 
 		$organic = Input::get('organic');
+
+		$userdata = Input::only(
+						'fname',
+						'lname',
+						'email',
+						'sname',
+						'snum',
+						'territory',
+						'date',
+						'organic');
+
+		Session::put('userdata',$userdata);
 
 		if($organic === "yes"){
 			return Redirect::to('orders/organics');
@@ -98,19 +114,20 @@ class OrderController extends \BaseController {
 			->withErrors($validator);
 		}
 		else{
-			return View::make('orders.review');
+			$userdata = Session::get('userdata');
+			return View::make('orders.review')->withUserdata($userdata);
 			}
 	}
 
 
 	/**
-	 * Store a newly created resource in storage.
+	 * Store a newly created order in storage.
 	 *
 	 * @return Response
 	 */
 	public function store()
 	{
-		//
+		return View::make('orders.confirmation');
 	}
 
 

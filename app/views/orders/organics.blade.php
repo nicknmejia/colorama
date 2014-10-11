@@ -13,7 +13,7 @@
 <!-- End Breadcrumbs -->
 
 <!-- Items/Categories Start -->
-<form>
+{{ Form::open(array('action' => 'OrderController@review')) }}
 <div class="row panel item-selections">
   <p>Please click/tap the categories you would like to enter quantities from:</p>
     <div class="row panel">
@@ -130,14 +130,20 @@
 
 </div>
   
-  <div class="row panel">
-    <div class="large-6 columns">
-    </div>
-    <div class="large-6 columns">
-        <input type="submit" class="left" value="Next">
-    </div>
+<div class="row panel">
+  
+  <div class="large-6 columns">
+    @foreach(Session::get('userdata') as $name => $value)
+      <input type="hidden" name="{{ $name }}" value="{{ $value }}">
+    @endforeach
   </div>
-</form>
+  
+  <div class="large-6 columns">
+      <input type="submit" class="left" value="Next">
+  </div>
+ </div>
+
+{{ Form::close() }}
 <!-- Item/Categories End -->
 	
 @stop

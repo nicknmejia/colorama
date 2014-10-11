@@ -13,22 +13,22 @@
     </div>
     
   <!-- End Breadcrumbs -->
-  <form>
+  {{ Form::open(array('action' => 'OrderController@store')) }}
     <div class="row panel">
       <p>Please review your order below before submitting it:</p>
       <div class="large-4 columns">
-        <input type="text" placeholder="First Name">
-        <input type="text" placeholder="Last Name">
-        <input type="text" placeholder="Email">
+        <input type="text" value="{{{ $userdata['fname'] }}}" disabled>
+        <input type="text" value="{{{ $userdata['lname'] }}}" disabled>
+        <input type="text" value="{{{ $userdata['email'] }}}" disabled>
       </div>
       <div class="large-4 columns">
-        <input type="text" placeholder="Store Name">
-        <input type="text" placeholder="Store #">
-        <input type="text" placeholder="Ship Date">
+        <input type="text" value="{{{ $userdata['sname'] }}}" disabled>
+        <input type="text" value="{{{ $userdata['snum'] }}}"  disabled>
+        <input type="text" value="{{{ $userdata['date'] }}}"  disabled>
       </div>
 
       <div class="large-4 columns">
-        <textarea placeholder="Special Instructions"></textarea>
+        <textarea placeholder="Special Instructions" rows="5"></textarea>
       </div>
     </div>
     <div class="row centered">
@@ -159,7 +159,7 @@
     <div class="row centered">
       <input type="submit">
     </div>
-  </form>
+{{ Form::close() }}
 <!-- End of Form -->
 
 @stop
