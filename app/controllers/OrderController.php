@@ -2,6 +2,13 @@
 
 class OrderController extends \BaseController {
 
+
+	public function array_push_assoc($array, $key, $value){
+			$array[$key] = $value;
+				return $array;
+		}
+
+
 	/**
 	 * Display a new something.  I don't think I need the index route.
 	 *
@@ -29,6 +36,8 @@ class OrderController extends \BaseController {
 			array_push($items, DB::table($category->table)->get());
 		}
 
+		Session::put('items',$items);
+
 		return View::make('orders.form')
 			->withTables($tables)
 			->withItems($items)
@@ -44,9 +53,6 @@ class OrderController extends \BaseController {
 	 */
 	public function organic()
 	{
-		$userdata = Session::get('userdata');
-		$userdata['organic'] = "ok";
-		Session::put('userdata',$userdata);
 
 		return View::make('orders.organics');
 	}
@@ -60,7 +66,6 @@ class OrderController extends \BaseController {
 	public function review()
 	{
 
-		$organic = Input::get('organic');
 
 		$userdata = Input::only(
 						'fname',
@@ -69,29 +74,37 @@ class OrderController extends \BaseController {
 						'sname',
 						'snum',
 						'territory',
-						'date',
-						'organic');
+						'date');
 
 		Session::put('userdata',$userdata);
 
-		if($organic === "yes"){
-			return Redirect::to('orders/organics');
+		$itemdata = $input = Input::except(
+						'fname',
+						'lname',
+						'email',
+						'sname',
+						'snum',
+						'territory',
+						'date',
+						'_token',
+						'sinstruct');
+
+		//Session::put('itemdata',$itemdata);
+
 			/**
 				* DONT FORGET TO PASS THE ARRAYS GENERATED FROM YOUR ORDER
 				* WITH THE VIEW TRANSFER.  YOU NEED THOSE STILL...DUMBASS
 			*/
-		}
 
-		$rules = array(
+		/*$rules = array(
 		'fname'     => 'required',
 		'lname'     => 'required',
 		'email'     => 'required|email',
 		'sname'	    => 'required',
 		'snum'      => 'required|numeric',
 		'territory' => 'required',
-		'date'      => 'required|date',
-		'organic'   => 'required'
-	);
+		'date'      => 'required|date'
+	);*/
 
 		$messages = array(
     	'fname.required'     => '<li>Your first name is required</li>',
@@ -103,20 +116,46 @@ class OrderController extends \BaseController {
 		'snum.numeric'       => '<li>A valid store number is required</li>',
 		'territory.required' => '<li>Please select a territory</li>',
 		'date.required'      => '<li>Please select a date</li>',
-		'date.date'          => '<li>A valid date is required</li>',
-		'organic.required'   => '<li>Please indicate whether or not an organic order is required</li>'	
+		'date.date'          => '<li>A valid date is required</li>'
 	);
 
-		$validator = Validator::make(Input::all(), $rules, $messages);
+		$items = Session::get('items');
 
-		if($validator->fails()){
+		foreach($items as $array_pos => $array2){
+			$num_of_rows = count($items[$array_pos]);
+			for($i = 0;$i < $num_of_rows;$i++){
+			if(Input::get($items[$array_pos][$i]->id) != ''){
+				$items[$array_pos][$i]->qty = Input::get($items[$array_pos][$i]->id);
+			}
+			else{
+
+				unset($items[$array_pos][$i]);
+			}
+		}
+
+		}
+
+
+		/*foreach(Session::get('items') as $array_num => $array){
+
+
+
+		}*/
+
+
+		/*$validator = Validator::make(Input::all(), $rules, $messages);*/
+
+		/*if($validator->fails()){
 			return Redirect::to('orders/create')
 			->withErrors($validator);
 		}
-		else{
+		else{*/
 			$userdata = Session::get('userdata');
-			return View::make('orders.review')->withUserdata($userdata);
-			}
+			return View::make('orders.review')
+				->withUserdata($userdata)
+				->withItemdata($itemdata)
+				->withItems($items);
+			//}
 	}
 
 

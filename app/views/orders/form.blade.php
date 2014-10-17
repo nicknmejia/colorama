@@ -1,5 +1,14 @@
 @extends('layouts.main')
 @section('content')
+	
+	<div class="row">
+    <ul class="breadcrumbs bar-push">
+      <li class="current">Order Form</li>
+      <li class="unavailable">Review Order</li>
+      <li class="unavailable">Confirmation</li>
+    </ul>
+    </div>
+
 	<!-- Start Order Form Panel -->
 	{{ Form::open(array('action' => 'OrderController@review')) }}
 	<div class="row panel">
@@ -24,11 +33,7 @@
   </div>
 	  <div class="large-3 columns">
 	    <textarea placeholder="Special Instructions" name="sinstruct"></textarea>
-	    <div class="large-12 small-12 columns">
-	      <label>Include an Organic Order?</label>
-	      <input type="radio" name="organic" value="yes" id="yes"><label for="yes">Yes</label>
-	      <input type="radio" name="organic" value="no" id="yes"><label for="yes">No</label>
-	    </div>
+	    
 	  </div>
 	  <div class="large-12 columns">
 	  	<ul class="errors">
@@ -125,6 +130,7 @@
 
 	{{ Form::close() }}
 	<!-- End Order Form Panel -->
+
 
 	
 @stop

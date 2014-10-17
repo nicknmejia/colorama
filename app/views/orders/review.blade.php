@@ -6,7 +6,6 @@
     <div class="row">
     <ul class="breadcrumbs bar-push">
       <li class="unavailable">Order Form</li>
-      <li class="unavailable">Organic Form</li>
       <li class="current">Review Order</li>
       <li class="unavailable">Confirmation</li>
     </ul>
@@ -161,5 +160,6 @@
     </div>
 {{ Form::close() }}
 <!-- End of Form -->
+
 
 @stop
