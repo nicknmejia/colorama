@@ -160,6 +160,6 @@
     </div>
 {{ Form::close() }}
 <!-- End of Form -->
-
+{{{ var_dump($items) }}}
 
 @stop
