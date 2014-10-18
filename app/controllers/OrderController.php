@@ -29,6 +29,7 @@ class OrderController extends \BaseController {
 	{
 
 		$tables = DB::table('categories')->get();
+		Session::put('tables', $tables);
 		$table_count = count($tables);
 		$items = array();
 		$count = 0;
@@ -120,6 +121,8 @@ class OrderController extends \BaseController {
 	);
 
 		$items = Session::get('items');
+		$categories = Session::get('tables');
+
 
 		foreach($items as $array_pos => $array2){
 			$num_of_rows = count($items[$array_pos]);
@@ -154,7 +157,8 @@ class OrderController extends \BaseController {
 			return View::make('orders.review')
 				->withUserdata($userdata)
 				->withItemdata($itemdata)
-				->withItems($items);
+				->withItems($items)
+				->withCategories($categories);
 			//}
 	}
 

@@ -33,6 +33,8 @@
     <div class="row centered">
       <input type="submit">
     </div>
+
+
     <div class="row panel">
       <div class="large-6 columns">
         <label for="p808">808 Paks</label>
@@ -58,7 +60,12 @@
           </thead>
         </table>
       </div>
-      <div class="large-6 columns">
+
+      @foreach($categories as $category)
+
+      @endforeach
+
+      <!-- <div class="large-6 columns">
         <label for="p808">808 Paks</label>
         <table class="large-12 columns" id="p808">
           <thead>
@@ -153,13 +160,13 @@
             </tr>
           </thead>
         </table>
-      </div>
+      </div> -->
       
     <div class="row centered">
       <input type="submit">
     </div>
 {{ Form::close() }}
 <!-- End of Form -->
-{{{ var_dump($items) }}}
+
 
 @stop
