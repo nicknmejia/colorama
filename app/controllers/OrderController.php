@@ -34,7 +34,7 @@ class OrderController extends \BaseController {
 		$items = array();
 		$count = 0;
 		foreach($tables as $category){
-			array_push($items, DB::table($category->table)->get());
+			array_push($items, DB::table($category->table)->where('qty','!=',0)->get());
 		}
 
 		Session::put('items',$items);
@@ -79,7 +79,7 @@ class OrderController extends \BaseController {
 
 		Session::put('userdata',$userdata);
 
-		$itemdata = $input = Input::except(
+		$itemdata = Input::except(
 						'fname',
 						'lname',
 						'email',

@@ -36,137 +36,39 @@
 
 
     <div class="row panel">
-      <div class="large-6 columns">
-        <label for="p808">808 Paks</label>
-        <table class="large-12 columns" id="p808">
-          <thead>
-            <tr>
-              <th>Item Number</th>
-              <th>Description</th>
-              <th>Qty</th>
-            </tr>
-          </thead>
-        </table>
-      </div>
-      <div class="large-6 columns">
-        <label for="p806">806 Paks</label>
-        <table class="large-12 columns" id="p806">
-          <thead>
-            <tr>
-              <th>Item Number</th>
-              <th>Description</th>
-              <th>Qty</th>
-            </tr>
-          </thead>
-        </table>
-      </div>
+    <?php $count = 0; ?>
 
       @foreach($categories as $category)
-
+        @if(!empty($items[$count]))
+          <div class="large-6 columns">
+          <label for="{{{$category->table}}}">{{{ $category->name }}}</label>
+          <table class="large-12 columns" id="{{{$category->table}}}">
+            <thead>
+              <tr>
+                <th>Item Number</th>
+                <th>Description</th>
+                <th>Qty</th>
+              </tr>
+            </thead>
+            @foreach($items[$count] as $item)
+              <tr>
+                <td>{{{ $item->id }}}</td>
+                <td>{{{ $item->description }}}</td>
+                <td>{{{ $item->qty }}}</td>
+              </tr>
+            @endforeach
+          </table>
+        </div>
+        @endif
+        <?php $count++; ?>
       @endforeach
 
-      <!-- <div class="large-6 columns">
-        <label for="p808">808 Paks</label>
-        <table class="large-12 columns" id="p808">
-          <thead>
-            <tr>
-              <th>Item Number</th>
-              <th>Description</th>
-              <th>Qty</th>
-            </tr>
-          </thead>
-        </table>
-      </div>
-      <div class="large-6 columns">
-        <label for="p806">806 Paks</label>
-        <table class="large-12 columns" id="p806">
-          <thead>
-            <tr>
-              <th>Item Number</th>
-              <th>Description</th>
-              <th>Qty</th>
-            </tr>
-          </thead>
-        </table>
-      </div>
-      <div class="large-6 columns">
-        <label for="p808">808 Paks</label>
-        <table class="large-12 columns" id="p808">
-          <thead>
-            <tr>
-              <th>Item Number</th>
-              <th>Description</th>
-              <th>Qty</th>
-            </tr>
-          </thead>
-        </table>
-      </div>
-      <div class="large-6 columns">
-        <label for="p806">806 Paks</label>
-        <table class="large-12 columns" id="p806">
-          <thead>
-            <tr>
-              <th>Item Number</th>
-              <th>Description</th>
-              <th>Qty</th>
-            </tr>
-          </thead>
-        </table>
-      </div>
-      <div class="large-6 columns">
-        <label for="p808">808 Paks</label>
-        <table class="large-12 columns" id="p808">
-          <thead>
-            <tr>
-              <th>Item Number</th>
-              <th>Description</th>
-              <th>Qty</th>
-            </tr>
-          </thead>
-        </table>
-      </div>
-      <div class="large-6 columns">
-        <label for="p806">806 Paks</label>
-        <table class="large-12 columns" id="p806">
-          <thead>
-            <tr>
-              <th>Item Number</th>
-              <th>Description</th>
-              <th>Qty</th>
-            </tr>
-          </thead>
-        </table>
-      </div>
-      <div class="large-6 columns">
-        <label for="p808">808 Paks</label>
-        <table class="large-12 columns" id="p808">
-          <thead>
-            <tr>
-              <th>Item Number</th>
-              <th>Description</th>
-              <th>Qty</th>
-            </tr>
-          </thead>
-        </table>
-      </div>
-      <div class="large-6 columns">
-        <label for="p806">806 Paks</label>
-        <table class="large-12 columns" id="p806">
-          <thead>
-            <tr>
-              <th>Item Number</th>
-              <th>Description</th>
-              <th>Qty</th>
-            </tr>
-          </thead>
-        </table>
-      </div> -->
       
+    </div>   
     <div class="row centered">
       <input type="submit">
     </div>
 {{ Form::close() }}
 <!-- End of Form -->
-
 
 @stop
