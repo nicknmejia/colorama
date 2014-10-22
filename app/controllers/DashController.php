@@ -20,17 +20,27 @@ class DashController extends \BaseController {
 	 */
 	public function dashboard()
 	{
-		$name = Auth::user()->name;
+		$name = Auth::user()->f_name;
 		$admin = Auth::user()->admin;
 		$id = Auth::id();
 		$territory = Auth::user()->territory;
+		$order_info = array();
+		$order_check = DB::table('orders')
+						 ->where('username', Auth::user()
+												->username)
+						 ->where('print', '!=', 3)
+						 ->get();
+		$order_count = count($order_check);
+
 		if($admin === "YES")
 		{
 			return View::make('admin_dash')
 				->withUser($name)
 				->withId($id)
 				->withAdmin($admin)
-				->withTerritory($territory);
+				->withTerritory($territory)
+				->withOrder_check($order_check)
+				->withOrder_count($order_count);
 		}
 		elseif($admin === "NO")
 		{
@@ -38,7 +48,9 @@ class DashController extends \BaseController {
 				->withUser($name)
 				->withId($id)
 				->withAdmin($admin)
-				->withTerritory($territory);
+				->withTerritory($territory)
+				->withOrder_check($order_check)
+				->withOrder_count($order_count);
 		}
 		else
 		{

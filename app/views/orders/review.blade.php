@@ -70,5 +70,5 @@
     </div>
 {{ Form::close() }}
 <!-- End of Form -->
-
+{{{ var_dump(Session::get('items')) }}} -->
 @stop

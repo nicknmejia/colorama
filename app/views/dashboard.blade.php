@@ -12,7 +12,7 @@
     </div>
     <div class="large-7 columns">
         <div class="row centered">
-          <div class="large-3 medium-3 columns space"><span class="ord">8</span><br/>Total to Ship:</div>
+          <div class="large-3 medium-3 columns space"><span class="ord">{{{ $order_count }}}</span><br/>Total to Ship:</div>
           <div class="large-3 medium-3 columns space"><span class="ord">2</span><br/>Pending:</div>
           <div class="large-3 medium-3 columns space"><span class="ord">3</span><br/>In the Yard:</div>
           <div class="large-3 medium-3 columns space"><span class="ord">3</span><br/>Processed:</div>
@@ -84,5 +84,4 @@
     </fieldset>
     </form>
   </div>
-	
 @stop

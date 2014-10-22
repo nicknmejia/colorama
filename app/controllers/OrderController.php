@@ -27,7 +27,6 @@ class OrderController extends \BaseController {
 	 */
 	public function create()
 	{
-
 		$tables = DB::table('categories')->get();
 		Session::put('tables', $tables);
 		$table_count = count($tables);
@@ -75,7 +74,8 @@ class OrderController extends \BaseController {
 						'sname',
 						'snum',
 						'territory',
-						'date');
+						'date',
+						'sinstruct');
 
 		Session::put('userdata',$userdata);
 
@@ -127,16 +127,17 @@ class OrderController extends \BaseController {
 		foreach($items as $array_pos => $array2){
 			$num_of_rows = count($items[$array_pos]);
 			for($i = 0;$i < $num_of_rows;$i++){
-			if(Input::get($items[$array_pos][$i]->id) != ''){
-				$items[$array_pos][$i]->qty = Input::get($items[$array_pos][$i]->id);
-			}
-			else{
+				if(Input::get($items[$array_pos][$i]->id) != ''){
+					$items[$array_pos][$i]->qty = Input::get($items[$array_pos][$i]->id);
+				}
+				else{
+					unset($items[$array_pos][$i]);
+				}
 
-				unset($items[$array_pos][$i]);
 			}
-		}
 
 		}
+		
 
 
 		/*foreach(Session::get('items') as $array_num => $array){
@@ -170,7 +171,29 @@ class OrderController extends \BaseController {
 	 */
 	public function store()
 	{
-		return View::make('orders.confirmation');
+		$userdata = Session::get('userdata');
+		$id = DB::table('orders')->insertGetId(
+    			array('order_date' => date('m-d-Y'),
+    			  'ship_date'  => $userdata['date'], 
+    			  'f_name'     => $userdata['fname'],
+    			  'l_name'	   => $userdata['lname'],
+    			  's_name'	   => $userdata['sname'],
+    			  's_num'      => $userdata['snum'],
+    			  'territory'  => $userdata['territory'],
+    			  'timestamp'  => date('m-d-Y H:i:s'),
+    			  's_instruct' => $userdata['sinstruct'],
+    			  'email'      => $userdata['email'],
+    			  'username'   => Auth::user()->username)
+		);
+
+		$items = Session::get('items');
+
+		foreach($items as $array_num => $array){
+
+		}
+
+		return View::make('orders.confirmation')
+			->withId($id);
 	}
 
 
