@@ -1,7 +1,5 @@
 ﻿$('.table').hide();
 
-$('.category').hide();
-
 
 
 

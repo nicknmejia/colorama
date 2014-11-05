@@ -3,31 +3,34 @@
 
 	<!-- Start Breadcrumbs -->
   
-    <div class="row">
+  <div class="row">
     <ul class="breadcrumbs bar-push">
       <li class="unavailable">Order Form</li>
+      <li class="unavailable">Part One</li>
+      <li class="unavailable">Part Two</li>
+      <li class="unavailable">Part Three</li>
       <li class="current">Review Order</li>
       <li class="unavailable">Confirmation</li>
     </ul>
-    </div>
+  </div>
     
   <!-- End Breadcrumbs -->
   {{ Form::open(array('action' => 'OrderController@store')) }}
     <div class="row panel">
       <p>Please review your order below before submitting it:</p>
       <div class="large-4 columns">
-        <input type="text" value="{{{ $userdata['fname'] }}}" disabled>
-        <input type="text" value="{{{ $userdata['lname'] }}}" disabled>
-        <input type="text" value="{{{ $userdata['email'] }}}" disabled>
+        <input type="text" value="{{{ $order[0]->f_name }}}" disabled>
+        <input type="text" value="{{{ $order[0]->l_name }}}" disabled>
+        <input type="text" value="{{{ $order[0]->email }}}" disabled>
       </div>
       <div class="large-4 columns">
-        <input type="text" value="{{{ $userdata['sname'] }}}" disabled>
-        <input type="text" value="{{{ $userdata['snum'] }}}"  disabled>
-        <input type="text" value="{{{ $userdata['date'] }}}"  disabled>
+        <input type="text" value="{{{ $order[0]->s_name }}}" disabled>
+        <input type="text" value="{{{ $order[0]->s_num }}}"  disabled>
+        <input type="text" value="{{{ $order[0]->ship_date }}}"  disabled>
       </div>
 
       <div class="large-4 columns">
-        <textarea placeholder="Special Instructions" rows="5"></textarea>
+        <textarea placeholder="Special Instructions" rows="5" value="{{{ $order[0]->s_instruct }}}"></textarea>
       </div>
     </div>
     <div class="row centered">
@@ -37,32 +40,6 @@
 
     <div class="row panel">
     <?php $count = 0; ?>
-
-      @foreach($categories as $category)
-        @if(!empty($items[$count]))
-          <div class="large-6 columns">
-          <label for="{{{$category->table}}}">{{{ $category->name }}}</label>
-          <table class="large-12 columns" id="{{{$category->table}}}">
-            <thead>
-              <tr>
-                <th>Item Number</th>
-                <th>Description</th>
-                <th>Qty</th>
-              </tr>
-            </thead>
-            @foreach($items[$count] as $item)
-              <tr>
-                <td>{{{ $item->id }}}</td>
-                <td>{{{ $item->description }}}</td>
-                <td>{{{ $item->qty }}}</td>
-              </tr>
-            @endforeach
-          </table>
-        </div>
-        @endif
-        <?php $count++; ?>
-      @endforeach
-
       
     </div>   
     <div class="row centered">
@@ -70,5 +47,5 @@
     </div>
 {{ Form::close() }}
 <!-- End of Form -->
-{{{ var_dump(Session::get('items')) }}} -->
+
 @stop

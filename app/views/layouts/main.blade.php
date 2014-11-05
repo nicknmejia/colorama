@@ -69,7 +69,7 @@
     $(document).foundation();
 
     $(function() {
-    $( "#datepicker" ).datepicker();
+    $( "#datepicker" ).datepicker({ dateFormat: 'mm-dd-yy' });
   });
 
   </script>

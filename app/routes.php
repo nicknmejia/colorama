@@ -40,6 +40,11 @@ Route::group(array('before' => 'auth'), function()
 	Route::get('/tools', 'DashController@more');
 	Route::post('/review', 'OrderController@review');
 	Route::post('/orders/organics', 'OrderController@organic');
+
+	// Temporary storage routes
+	Route::post('/orders/form-one', 'OrderController@store_temp');
+	Route::post('/orders/form-two', 'OrderController@store_temp_two');
+	Route::post('/orders/form-three', 'OrderController@store_temp_three');
 	
 	// RESTful routes!  Huzzah!
 	Route::resource('orders','OrderController');
