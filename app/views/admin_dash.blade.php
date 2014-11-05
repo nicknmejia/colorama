@@ -13,9 +13,9 @@
     <div class="large-7 columns">
         <div class="row centered">
           <div class="large-3 medium-3 columns space"><span class="ord">{{{ $order_count }}}<!-- SQL pull for ALL orders going next day --></span><br/>Total to Ship:</div>
-          <div class="large-3 medium-3 columns space"><span class="ord">2<!-- SQL pull for unprinted orders --></span><br/>Pending:</div>
-          <div class="large-3 medium-3 columns space"><span class="ord">3<!-- SQL pull for printed orders --></span><br/>In the Yard:</div>
-          <div class="large-3 medium-3 columns space"><span class="ord">3<!-- SQL pull for processed orders --></span><br/>Processed:</div>
+          <div class="large-3 medium-3 columns space"><span class="ord">{{{ count($pending) }}}<!-- SQL pull for unprinted orders --></span><br/>Pending:</div>
+          <div class="large-3 medium-3 columns space"><span class="ord">{{{ count($printed) }}}<!-- SQL pull for printed orders --></span><br/>In the Yard:</div>
+          <div class="large-3 medium-3 columns space"><span class="ord">{{{ count($processed) }}}<!-- SQL pull for processed orders --></span><br/>Processed:</div>
         </div>
     </div>
   </div>
@@ -46,7 +46,7 @@
   <div class="row">
     <form>
     <fieldset>
-      <legend>Orders to Ship</legend>
+      <legend>Orders to Ship Tomorrow</legend>
       <table class="large-12 columns">
         <thead>
           <tr>
@@ -62,23 +62,39 @@
         </thead>
         <tbody>
           <!-- Each of these table rows will be built from PHP SQL queries -->
-          @for($i = 0; $i < 2; $i++)
-          <tr>
-            <td>{{{ $order_check[$i]->id }}}</td>
-            <td class="hide-for-small">{{{ $order_check[$i]->order_date }}}</td>
-            <td>{{{ $order_check[$i]->ship_date }}}</td>
-            <td class="hide-for-small">{{{ $order_check[$i]->s_name }}}</td>
-            <td>{{{ $order_check[$i]->s_num }}}</td>
-            <td>Processed</td>
-            <td><input type="submit" value="00"></td>
-          </tr>
-          @endfor
+
+            @foreach($order_check as $order)
+            <tr>
+              <td>{{{ $order->id }}}</td>
+              <td class="hide-for-small">{{{ $order->order_date }}}</td>
+              <td>{{{ $order->ship_date }}}</td>
+              <td class="hide-for-small">{{{ $order->s_name }}}</td>
+              <td>{{{ $order->s_num }}}</td>
+              <td>
+                @if($order->progress == 0)
+                  Pending
+                @elseif($order->progress == 1)
+                  Printed
+                @elseif($order->progress == 2)
+                  Processed
+                @else
+                  Error
+                @endif
+              </td>
+              <td><input type="submit" value="00"></td>
+            </tr>
+            @endforeach
+         
+          
       
         </tbody>
       </table>
     </fieldset>
     </form>
   </div>
-  {{{ var_dump($order_check) }}}
 <!-- End Order List -->
+<br/>
+{{{ var_dump($order_check) }}}
+<br/>
+{{{ var_dump(Session::all()) }}}
 @stop

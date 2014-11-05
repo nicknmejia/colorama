@@ -20,6 +20,9 @@ class DashController extends \BaseController {
 	 */
 	public function dashboard()
 	{
+		$tomorrow = date('m-d-Y', strtotime(' +1 day'));
+		$today = date('m-d-Y');
+
 		$name = Auth::user()->f_name;
 		$admin = Auth::user()->admin;
 		$id = Auth::id();
@@ -28,8 +31,29 @@ class DashController extends \BaseController {
 		$order_check = DB::table('orders')
 						 ->where('username', Auth::user()
 												->username)
+						 ->where('ship_date','=',$tomorrow)
 						 ->where('print', '!=', 3)
+						 ->orderBy('ship_date', 'desc')
 						 ->get();
+
+		$pending = DB::table('orders')
+						->where('username', Auth::user()
+												->username)
+						->where('progress', '=', 0)
+						->get();
+
+		$printed = DB::table('orders')
+						->where('username', Auth::user()
+												->username)
+						->where('progress', '=', 1)
+						->get();
+
+		$processed = DB::table('orders')
+						->where('username', Auth::user()
+												->username)
+						->where('progress', '=', 2)
+						->get();
+
 		$order_count = count($order_check);
 
 		if($admin === "YES")
@@ -40,7 +64,12 @@ class DashController extends \BaseController {
 				->withAdmin($admin)
 				->withTerritory($territory)
 				->withOrder_check($order_check)
-				->withOrder_count($order_count);
+				->withOrder_count($order_count)
+				->withPending($pending)
+				->withPrinted($printed)
+				->withProcessed($processed)
+				->withTomorrow($tomorrow)
+				->withToday($today);
 		}
 		elseif($admin === "NO")
 		{
@@ -50,7 +79,10 @@ class DashController extends \BaseController {
 				->withAdmin($admin)
 				->withTerritory($territory)
 				->withOrder_check($order_check)
-				->withOrder_count($order_count);
+				->withOrder_count($order_count)
+				->withPending($pending)
+				->withPrinted($printed)
+				->withProcessed($processed);;
 		}
 		else
 		{

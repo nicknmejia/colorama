@@ -1,21 +1,21 @@
 @extends('layouts.main')
 @section('content')
 	
-	<!-- Start Headline Content -->
+<!-- Start Headline Content -->
 
   <div class="row panel bar-push">
     <div class="large-5 columns">
       <br/>
       <h1>Welcome {{{ $user }}}</h1>
-      <p>Today's Date: 8/26/2014</p>
-      <p>Server Time: 11:59:22 A.M</p>
+      <p>Today's Date: 8/26/2014</p> <!-- Use PHP date function on this line -->
+      <p>Server Time: 11:59:22 A.M</p> <!-- Grab server time and echo it live -->
     </div>
     <div class="large-7 columns">
         <div class="row centered">
-          <div class="large-3 medium-3 columns space"><span class="ord">{{{ $order_count }}}</span><br/>Total to Ship:</div>
-          <div class="large-3 medium-3 columns space"><span class="ord">2</span><br/>Pending:</div>
-          <div class="large-3 medium-3 columns space"><span class="ord">3</span><br/>In the Yard:</div>
-          <div class="large-3 medium-3 columns space"><span class="ord">3</span><br/>Processed:</div>
+          <div class="large-3 medium-3 columns space"><span class="ord">{{{ $order_count }}}<!-- SQL pull for ALL orders going next day --></span><br/>Total to Ship:</div>
+          <div class="large-3 medium-3 columns space"><span class="ord">{{{ count($pending) }}}<!-- SQL pull for unprinted orders --></span><br/>Pending:</div>
+          <div class="large-3 medium-3 columns space"><span class="ord">{{{ count($printed) }}}<!-- SQL pull for printed orders --></span><br/>In the Yard:</div>
+          <div class="large-3 medium-3 columns space"><span class="ord">{{{ count($processed) }}}<!-- SQL pull for processed orders --></span><br/>Processed:</div>
         </div>
     </div>
   </div>
@@ -34,10 +34,11 @@
     </form>
   </div>
 
+  <!-- Start Order Lists -->
   <div class="row">
     <form>
     <fieldset>
-      <legend>Orders to Ship</legend>
+      <legend>Orders to Ship Tomorrow</legend>
       <table class="large-12 columns">
         <thead>
           <tr>
@@ -52,33 +53,32 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>1</td>
-            <td class="hide-for-small">08-16-2014 15:48:56</td>
-            <td>08/18/2014</td>
-            <td class="hide-for-small">Santa Ana</td>
-            <td>606</td>
-            <td>Processed</td>
-            <td><input type="submit" value="00"></td>
-          </tr>
-          <tr>
-            <td>1</td>
-            <td class="hide-for-small">08-16-2014 16:49:26</td>
-            <td>08/18/2014</td>
-            <td class="hide-for-small">Marina Del Rey</td>
-            <td>6611</td>
-            <td>Printed</td>
-            <td><input type="submit" value="01"></td>
-          </tr>
-          <tr>
-            <td>1</td>
-            <td class="hide-for-small">08-17-2014 12:38:44</td>
-            <td>08/19/2014</td>
-            <td class="hide-for-small">Simi Valley</td>
-            <td>6640</td>
-            <td>Pending</td>
-            <td><input type="submit" value="02"></td>
-          </tr>
+          <!-- Each of these table rows will be built from PHP SQL queries -->
+
+            @foreach($order_check as $order)
+            <tr>
+              <td>{{{ $order->id }}}</td>
+              <td class="hide-for-small">{{{ $order->order_date }}}</td>
+              <td>{{{ $order->ship_date }}}</td>
+              <td class="hide-for-small">{{{ $order->s_name }}}</td>
+              <td>{{{ $order->s_num }}}</td>
+              <td>
+               @if($order->progress == 0)
+                  Pending
+                @elseif($order->progress == 1)
+                  Printed
+                @elseif($order->progress == 2)
+                  Processed
+                @else
+                  Error
+                @endif
+              </td>
+              <td><input type="submit" value="00"></td>
+            </tr>
+            @endforeach
+         
+          
+      
         </tbody>
       </table>
     </fieldset>
