@@ -56,9 +56,4 @@
 	  </div>
 
   {{ Form::close() }}
-  <br/>
-  {{{ var_dump(Session::get('p1_items')) }}}
-  <br/>
-  {{{ var_dump(Session::get('p1_cat')) }}}
-  <br/>
 @stop

@@ -30,7 +30,5 @@
     </div>
   </div>
 
-{{{ var_dump($final_items) }}}
-
   <!-- End Main Body -->
  @stop

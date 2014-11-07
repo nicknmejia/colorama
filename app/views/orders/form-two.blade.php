@@ -57,7 +57,4 @@
 
   {{ Form::close() }}
 
-  <br/>
-  {{{ var_dump($items) }}}
-
 @stop

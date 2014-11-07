@@ -439,7 +439,7 @@ class OrderController extends \BaseController {
 		$id = Session::get('id');
 		$order = DB::table('orders_temp')->where('id', Session::get('id'))->get();
 
-		
+
 
 		return View::make('orders.review')->withOrder($order)->withId($id);
 
@@ -480,7 +480,11 @@ class OrderController extends \BaseController {
 		
 		foreach($final_items as $array_num => $object){
 			DB::table('product')->insert(
-				array('order' => $new_id, 'id' => $object->id, 'qty' => $object->qty)
+				array('order' => $new_id,
+					  'id' => $object->id, 
+					  'qty' => $object->qty, 
+					  'description' => $object->description,
+					  'category' => $object->category)
 			);
 		}
 
