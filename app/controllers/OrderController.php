@@ -294,7 +294,7 @@ class OrderController extends \BaseController {
 			DB::table('product_temp')->where('page', '=', 'p1')->where('order', '=', Session::get('id'))->delete();
 		}
 
-		$input = Input::except('_token');
+		/*$input = Input::except('_token');
 
 		foreach ($input as $id => $qty) {
 			if($qty == ''){
@@ -305,14 +305,42 @@ class OrderController extends \BaseController {
 		  	 		array('order' => Session::get('id'), 'id' => $id, 'qty' => $qty, 'page' => 'p1')
 				);
 			}
-		}
+		}*/
+
+		$items = Session::Get('p1_items');
+		$p1_cat = Session::get('p1_cat');
+
+		foreach($items as $array_pos => $array2){
+		      $num_of_rows = count($items[$array_pos]);
+		      for($i = 0;$i < $num_of_rows;$i++){
+		      	if(Input::get($items[$array_pos][$i]->id) != ''){
+		        	$items[$array_pos][$i]->qty = Input::get($items[$array_pos][$i]->id);
+		        	DB::table('product_temp')->insert(
+		  	 		array('order' => Session::get('id'),
+		  	 		 	  'id' => $items[$array_pos][$i]->id, 
+		  	 		 	  'qty' => $items[$array_pos][$i]->qty, 
+		  	 		 	  'page' => 'p1',
+		  	 		 	  'description' => $items[$array_pos][$i]->description,
+		  	 		 	  'category' => $p1_cat[key($p1_cat)]
+		  	 		 	)
+					);
+		        }
+		      	else{
+		        	unset($items[$array_pos][$i]);
+		      	}
+
+		      }
+		      next($p1_cat);
+	    }
 
 		$p2_cat = Session::get('p2_cat');
 		$p2_items = Session::get('p2_items');
+		Session::put('p1_items', $items);
 		Session::put('p1_check', 1);
 		return View::make('orders.form-two')
 						->withP2_cat($p2_cat)
-						->withP2_items($p2_items);
+						->withP2_items($p2_items)
+						->withItems($items);
 	}
 
 
@@ -336,7 +364,7 @@ class OrderController extends \BaseController {
 			DB::table('product_temp')->where('page', '=', 'p2')->where('order', '=', Session::get('id'))->delete();
 		}
 
-		$input = Input::except('_token');
+		/*$input = Input::except('_token');
 
 		foreach ($input as $id => $qty) {
 			if($qty == ''){
@@ -347,10 +375,37 @@ class OrderController extends \BaseController {
 		   	 		array('order' => Session::get('id'), 'id' => $id, 'qty' => $qty, 'page' => 'p2')
 				);
 			}
-		}
+		}*/
+
+		$items = Session::Get('p2_items');
+		$p2_cat = Session::get('p2_cat');
+
+		foreach($items as $array_pos => $array2){
+		      $num_of_rows = count($items[$array_pos]);
+		      for($i = 0;$i < $num_of_rows;$i++){
+		      	if(Input::get($items[$array_pos][$i]->id) != ''){
+		        	$items[$array_pos][$i]->qty = Input::get($items[$array_pos][$i]->id);
+		        	DB::table('product_temp')->insert(
+		  	 		array('order' => Session::get('id'),
+		  	 		 	  'id' => $items[$array_pos][$i]->id, 
+		  	 		 	  'qty' => $items[$array_pos][$i]->qty, 
+		  	 		 	  'page' => 'p2',
+		  	 		 	  'description' => $items[$array_pos][$i]->description,
+		  	 		 	  'category' => $p2_cat[key($p2_cat)]
+		  	 		 	)
+					);
+		        }
+		      	else{
+		        	unset($items[$array_pos][$i]);
+		      	}
+
+		      }
+		      next($p2_cat);
+	    }
 		
 		$p3_cat = Session::get('p3_cat');
 		$p3_items = Session::get('p3_items');
+		Session::put('p2_items', $items);
 		Session::put('p2_check', 1);
 		return View::make('orders.form-three')
 						->withP3_cat($p3_cat)
@@ -378,7 +433,7 @@ class OrderController extends \BaseController {
 		}
 
 
-		$input = Input::except('_token');
+		/*$input = Input::except('_token');
 
 		foreach ($input as $id => $qty) {
 			if($qty == ''){
@@ -389,16 +444,41 @@ class OrderController extends \BaseController {
 		   	 		array('order' => Session::get('id'), 'id' => $id, 'qty' => $qty, 'page' => 'p3')
 				);
 			}
-		}
+		}*/
 
+		$items = Session::Get('p3_items');
+		$p3_cat = Session::get('p3_cat');
+
+		foreach($items as $array_pos => $array2){
+		      $num_of_rows = count($items[$array_pos]);
+		      for($i = 0;$i < $num_of_rows;$i++){
+		      	if(Input::get($items[$array_pos][$i]->id) != ''){
+		        	$items[$array_pos][$i]->qty = Input::get($items[$array_pos][$i]->id);
+		        	DB::table('product_temp')->insert(
+		  	 		array('order' => Session::get('id'),
+		  	 		 	  'id' => $items[$array_pos][$i]->id, 
+		  	 		 	  'qty' => $items[$array_pos][$i]->qty, 
+		  	 		 	  'page' => 'p3',
+		  	 		 	  'description' => $items[$array_pos][$i]->description,
+		  	 		 	  'category' => $p3_cat[key($p3_cat)]
+		  	 		 	)
+					);
+		        }
+		      	else{
+		        	unset($items[$array_pos][$i]);
+		      	}
+
+		      }
+		      next($p3_cat);
+	    }
+
+	    Session::put('p3_items', $items);
 		Session::put('p3_check', 1);
-
-		$final_items = DB::table('product_temp')->where('order', Session::get('id'))->get();
 
 		$id = Session::get('id');
 		$order = DB::table('orders_temp')->where('id', Session::get('id'))->get();
 
-		return View::make('orders.review')->withOrder($order)->withId($id)->withFinal_items($final_items);
+		return View::make('orders.review')->withOrder($order)->withId($id);
 
 	}
 
