@@ -16,6 +16,11 @@ class OrderController extends \BaseController {
 	}
 
 
+
+
+
+
+
 	/**
 	 * Show the form for creating a new resource.
 	 *
@@ -41,6 +46,11 @@ class OrderController extends \BaseController {
 
 		return View::make('orders.form');
 	}
+
+
+
+
+
 
 	/**
 	 * Store the temporary order info and display section 1
@@ -95,9 +105,7 @@ class OrderController extends \BaseController {
 					array_push($set_categories, $object->table);
 				}
 			}
-
 			Session::put('set_categories', $set_categories);
-		
 
 		//===================================
 				// Page One Query
@@ -258,10 +266,15 @@ class OrderController extends \BaseController {
 		Session::put('order_check',1);
 		return View::make('orders.form-one')
 						->withP1_cat($p1_cat)
-						->withP1_items($p1_items);
+						->withP1_items($p1_items)
+						->withItems($items);
 
 		}
 	}
+
+
+
+
 
 
 	/**
@@ -302,6 +315,10 @@ class OrderController extends \BaseController {
 						->withP2_items($p2_items);
 	}
 
+
+
+
+
 	/**
 	 * Store the temporary order items from section 1 and display section 2
 	 *
@@ -341,6 +358,9 @@ class OrderController extends \BaseController {
 	}
 
 
+
+
+
 	/**
 	 * Review your order before storing it.
 	 *
@@ -373,12 +393,17 @@ class OrderController extends \BaseController {
 
 		Session::put('p3_check', 1);
 
+		$final_items = DB::table('product_temp')->where('order', Session::get('id'))->get();
+
 		$id = Session::get('id');
 		$order = DB::table('orders_temp')->where('id', Session::get('id'))->get();
 
-		return View::make('orders.review')->withOrder($order)->withId($id);
+		return View::make('orders.review')->withOrder($order)->withId($id)->withFinal_items($final_items);
 
 	}
+
+
+
 
 
 	/**
@@ -425,6 +450,9 @@ class OrderController extends \BaseController {
 			->withNew_id($new_id)
 			->withFinal_items($final_items);
 	}
+
+
+
 
 
 	/**
