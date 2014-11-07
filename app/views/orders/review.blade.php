@@ -47,5 +47,12 @@
     </div>
 {{ Form::close() }}
 <!-- End of Form -->
+{{{ var_dump(Session::get('p1_items')) }}}
+{{{ var_dump(Session::get('p2_items')) }}}
+{{{ var_dump(Session::get('p3_items')) }}}
+<br/>
+<br/>
+{{{ var_dump(Session::get('set_categories')) }}}
+
 
 @stop

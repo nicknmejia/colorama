@@ -131,7 +131,6 @@
 	    </div>
 	  </div>
 
-
 	{{ Form::close() }}
 	<!-- End Order Form Panel -->
 

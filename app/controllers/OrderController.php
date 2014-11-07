@@ -1,12 +1,8 @@
-<?php
+ <?php
 
 class OrderController extends \BaseController {
 
 
-	public function array_push_assoc($array, $key, $value){
-			$array[$key] = $value;
-				return $array;
-		}
 
 
 	/**
@@ -27,6 +23,22 @@ class OrderController extends \BaseController {
 	 */
 	public function create()
 	{
+		Session::forget('tables');
+		Session::forget('userdata');
+		Session::forget('p1_cat');
+		Session::forget('p1_items');
+		Session::forget('p2_items');
+		Session::forget('p2_cat');
+		Session::forget('p3_items');
+		Session::forget('p3_cat');
+		Session::forget('id');
+		Session::forget('set_categories');
+		Session::forget('order_check');
+		Session::forget('p1_check');
+		Session::forget('p2_check');
+		Session::forget('p3_check');
+		Session::forget('final_check');
+
 		return View::make('orders.form');
 	}
 
@@ -38,6 +50,10 @@ class OrderController extends \BaseController {
 
 	public function store_temp()
 	{
+		if(Session::get('final_check') == 1){
+			return Redirect::to('/dashboard')->with('message', 'You must start a new order');
+		}
+		//
 
 		//===================================
 				// Grab the tables
@@ -68,6 +84,20 @@ class OrderController extends \BaseController {
 						'sinstruct');
 
 		Session::put('userdata',$userdata);
+
+		//===================================
+				// Get Selected Catagories
+		//===================================	
+
+			$set_categories = array();
+			foreach($tables as $array => $object){
+				if(isset($_POST[$object->table])){
+					array_push($set_categories, $object->table);
+				}
+			}
+
+			Session::put('set_categories', $set_categories);
+		
 
 		//===================================
 				// Page One Query
@@ -189,6 +219,25 @@ class OrderController extends \BaseController {
 		else{
 
 		$userdata = Session::get('userdata');
+
+		if(Session::get('order_check') == 1){
+			DB::table('orders_temp')
+            ->where('id', Session::get('id'))
+            ->update(array('order_date' => date('m-d-Y'),
+    			  'ship_date'  => $userdata['date'], 
+    			  'f_name'     => $userdata['fname'],
+    			  'l_name'	   => $userdata['lname'],
+    			  's_name'	   => $userdata['sname'],
+    			  's_num'      => $userdata['snum'],
+    			  'territory'  => $userdata['territory'],
+    			  'timestamp'  => date('m-d-Y H:i:s'),
+    			  's_instruct' => $userdata['sinstruct'],
+    			  'email'      => $userdata['email'],
+    			  'username'   => Auth::user()->username)
+
+            );
+		}
+		else{
 		$id = DB::table('orders_temp')->insertGetId(
     			array('order_date' => date('m-d-Y'),
     			  'ship_date'  => $userdata['date'], 
@@ -202,9 +251,11 @@ class OrderController extends \BaseController {
     			  'email'      => $userdata['email'],
     			  'username'   => Auth::user()->username)
 		);
-
 		Session::put('id', $id);
+		}
 
+		
+		Session::put('order_check',1);
 		return View::make('orders.form-one')
 						->withP1_cat($p1_cat)
 						->withP1_items($p1_items);
@@ -222,19 +273,30 @@ class OrderController extends \BaseController {
 	public function store_temp_two()
 	{
 
+		if(Session::get('final_check') == 1){
+			return Redirect::to('/dashboard')->with('message', 'You must start a new order');
+		}
+
+		if(Session::get('p1_check') == 1){
+			DB::table('product_temp')->where('page', '=', 'p1')->where('order', '=', Session::get('id'))->delete();
+		}
+
 		$input = Input::except('_token');
 
 		foreach ($input as $id => $qty) {
 			if($qty == ''){
 				unset($input[$id]);
 			}
-			DB::table('product_temp')->insert(
-		   	 array('order' => Session::get('id'), 'id' => $id, 'qty' => $qty)
-			);
+			if($qty != 0){
+				DB::table('product_temp')->insert(
+		  	 		array('order' => Session::get('id'), 'id' => $id, 'qty' => $qty, 'page' => 'p1')
+				);
+			}
 		}
 
 		$p2_cat = Session::get('p2_cat');
 		$p2_items = Session::get('p2_items');
+		Session::put('p1_check', 1);
 		return View::make('orders.form-two')
 						->withP2_cat($p2_cat)
 						->withP2_items($p2_items);
@@ -247,7 +309,15 @@ class OrderController extends \BaseController {
 	 */
 
 	public function store_temp_three()
-	{
+	{	
+
+		if(Session::get('final_check') == 1){
+			return Redirect::to('/dashboard')->with('message', 'You must start a new order');
+		}
+
+		if(Session::get('p2_check') == 1){
+			DB::table('product_temp')->where('page', '=', 'p2')->where('order', '=', Session::get('id'))->delete();
+		}
 
 		$input = Input::except('_token');
 
@@ -255,13 +325,16 @@ class OrderController extends \BaseController {
 			if($qty == ''){
 				unset($input[$id]);
 			}
-			DB::table('product_temp')->insert(
-		   	 array('order' => Session::get('id'), 'id' => $id, 'qty' => $qty)
-			);
+			if($qty != 0){
+				DB::table('product_temp')->insert(
+		   	 		array('order' => Session::get('id'), 'id' => $id, 'qty' => $qty, 'page' => 'p2')
+				);
+			}
 		}
 		
 		$p3_cat = Session::get('p3_cat');
 		$p3_items = Session::get('p3_items');
+		Session::put('p2_check', 1);
 		return View::make('orders.form-three')
 						->withP3_cat($p3_cat)
 						->withP3_items($p3_items);
@@ -276,16 +349,29 @@ class OrderController extends \BaseController {
 	public function review()
 	{
 
+		if(Session::get('final_check') == 1){
+			return Redirect::to('/dashboard')->with('message', 'You must start a new order');
+		}
+
+		if(Session::get('p3_check') == 1){
+			DB::table('product_temp')->where('page', '=', 'p3')->where('order', '=', Session::get('id'))->delete();
+		}
+
+
 		$input = Input::except('_token');
 
 		foreach ($input as $id => $qty) {
 			if($qty == ''){
 				unset($input[$id]);
 			}
-			DB::table('product_temp')->insert(
-		   	 array('order' => Session::get('id'), 'id' => $id, 'qty' => $qty)
-			);
+			if($qty != 0){
+				DB::table('product_temp')->insert(
+		   	 		array('order' => Session::get('id'), 'id' => $id, 'qty' => $qty, 'page' => 'p3')
+				);
+			}
 		}
+
+		Session::put('p3_check', 1);
 
 		$id = Session::get('id');
 		$order = DB::table('orders_temp')->where('id', Session::get('id'))->get();
@@ -302,6 +388,9 @@ class OrderController extends \BaseController {
 	 */
 	public function store()
 	{
+		if(Session::get('final_check') == 1){
+			return Redirect::to('/dashboard')->with('message', 'You must start a new order');
+		}
 
 		$order = DB::table('orders_temp')->where('id', Session::get('id'))->get();
 
@@ -321,19 +410,16 @@ class OrderController extends \BaseController {
 
 		$final_items = DB::table('product_temp')->where('order', Session::get('id'))->get();
 		
+		foreach($final_items as $array_num => $object){
+			DB::table('product')->insert(
+				array('order' => $new_id, 'id' => $object->id, 'qty' => $object->qty)
+			);
+		}
 
 		DB::table('orders_temp')->where('id', Session::get('id'))->delete();
 		DB::table('product_temp')->where('order', Session::get('id'))->delete();
 
-		Session::forget('tables');
-		Session::forget('userdata');
-		Session::forget('p1_cat');
-		Session::forget('p1_items');
-		Session::forget('p2_items');
-		Session::forget('p2_cat');
-		Session::forget('p3_items');
-		Session::forget('p3_cat');
-		Session::forget('id');
+		Session::put('final_check', 1);
 
 		return View::make('orders.confirmation')
 			->withNew_id($new_id)

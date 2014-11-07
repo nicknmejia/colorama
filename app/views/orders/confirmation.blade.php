@@ -25,8 +25,8 @@
     <p class="large-12 columns centered small-margin">A confirmation will be mailed to your listed email account when your order has been printed for processing.</p>
     <p class="large-12 columns centered large-margin">If you have any questions, please contact customer service.</p>
     <div class="row centered">
-      <a href="#" class="large-6 columns large-margin"><i class="fi-pencil"></i><br/>Place Another Order</a>
-      <a href="#" class="large-6 columns large-margin"><i class="fi-home"></i><br/>Return to Portal</a>
+      <a href="{{ URL::to('orders/create') }}" class="large-6 columns large-margin"><i class="fi-pencil"></i><br/>Place Another Order</a>
+      <a href="{{ URL::to('/dashboard') }}" class="large-6 columns large-margin"><i class="fi-home"></i><br/>Return to Portal</a>
     </div>
   </div>
 

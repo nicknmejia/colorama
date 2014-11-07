@@ -94,7 +94,5 @@
   </div>
 <!-- End Order List -->
 <br/>
-{{{ var_dump($order_check) }}}
-<br/>
 {{{ var_dump(Session::all()) }}}
 @stop
