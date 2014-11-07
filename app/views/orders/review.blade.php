@@ -39,10 +39,89 @@
 
 
     <div class="row panel">
-    <?php $count = 0; ?>
+    <?php 
+
+    $count1 = 0; 
+    $count2 = 0;
+    $count3 = 0;
+
+    ?>
      
 
+      @foreach(Session::get('p1_cat') as $name => $table)
+        @if(!empty(Session::get('p1_items')[$count1]))
+          <div class="large-6 columns">
+          <label for="{{{$table}}}">{{{ $name }}}</label>
+          <table class="large-12 columns" id="{{{$table}}}">
+            <thead>
+              <tr>
+                <th>Item Number</th>
+                <th>Description</th>
+                <th>Qty</th>
+              </tr>
+            </thead>
+            @foreach(Session::get('p1_items')[$count1] as $item)
+              <tr>
+                <td>{{{ $item->id }}}</td>
+                <td>{{{ $item->description }}}</td>
+                <td>{{{ $item->qty }}}</td>
+              </tr>
+            @endforeach
+          </table>
+        </div>
+        @endif
+        <?php $count1++; ?>
+      @endforeach
 
+      @foreach(Session::get('p2_cat') as $name => $table)
+        @if(!empty(Session::get('p2_items')[$count2]))
+          <div class="large-6 columns">
+          <label for="{{{$table}}}">{{{ $name }}}</label>
+          <table class="large-12 columns" id="{{{$table}}}">
+            <thead>
+              <tr>
+                <th>Item Number</th>
+                <th>Description</th>
+                <th>Qty</th>
+              </tr>
+            </thead>
+            @foreach(Session::get('p2_items')[$count2] as $item)
+              <tr>
+                <td>{{{ $item->id }}}</td>
+                <td>{{{ $item->description }}}</td>
+                <td>{{{ $item->qty }}}</td>
+              </tr>
+            @endforeach
+          </table>
+        </div>
+        @endif
+        <?php $count2++; ?>
+      @endforeach
+
+      @foreach(Session::get('p3_cat') as $name => $table)
+        @if(!empty(Session::get('p3_items')[$count3]))
+          <div class="large-6 columns">
+          <label for="{{{$table}}}">{{{ $name }}}</label>
+          <table class="large-12 columns" id="{{{$table}}}">
+            <thead>
+              <tr>
+                <th>Item Number</th>
+                <th>Description</th>
+                <th>Qty</th>
+              </tr>
+            </thead>
+            @foreach(Session::get('p3_items')[$count3] as $item)
+              <tr>
+                <td>{{{ $item->id }}}</td>
+                <td>{{{ $item->description }}}</td>
+                <td>{{{ $item->qty }}}</td>
+              </tr>
+            @endforeach
+          </table>
+        </div>
+        @endif
+        <?php $count3++; ?>
+      @endforeach
 
 
     </div>   
@@ -52,14 +131,5 @@
 {{ Form::close() }}
 <!-- End of Form -->
 
-<br/>
-
-<br/>
-{{{ var_dump(Session::get('set_categories')) }}}
-
-
-      {{{ var_dump(Session::get('p1_items')) }}}
-      {{{ var_dump(Session::get('p2_items')) }}}
-      {{{ var_dump(Session::get('p3_items')) }}}
 
 @stop

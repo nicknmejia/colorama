@@ -294,18 +294,6 @@ class OrderController extends \BaseController {
 			DB::table('product_temp')->where('page', '=', 'p1')->where('order', '=', Session::get('id'))->delete();
 		}
 
-		/*$input = Input::except('_token');
-
-		foreach ($input as $id => $qty) {
-			if($qty == ''){
-				unset($input[$id]);
-			}
-			if($qty != 0){
-				DB::table('product_temp')->insert(
-		  	 		array('order' => Session::get('id'), 'id' => $id, 'qty' => $qty, 'page' => 'p1')
-				);
-			}
-		}*/
 
 		$items = Session::Get('p1_items');
 		$p1_cat = Session::get('p1_cat');
@@ -364,19 +352,6 @@ class OrderController extends \BaseController {
 			DB::table('product_temp')->where('page', '=', 'p2')->where('order', '=', Session::get('id'))->delete();
 		}
 
-		/*$input = Input::except('_token');
-
-		foreach ($input as $id => $qty) {
-			if($qty == ''){
-				unset($input[$id]);
-			}
-			if($qty != 0){
-				DB::table('product_temp')->insert(
-		   	 		array('order' => Session::get('id'), 'id' => $id, 'qty' => $qty, 'page' => 'p2')
-				);
-			}
-		}*/
-
 		$items = Session::Get('p2_items');
 		$p2_cat = Session::get('p2_cat');
 
@@ -432,20 +407,6 @@ class OrderController extends \BaseController {
 			DB::table('product_temp')->where('page', '=', 'p3')->where('order', '=', Session::get('id'))->delete();
 		}
 
-
-		/*$input = Input::except('_token');
-
-		foreach ($input as $id => $qty) {
-			if($qty == ''){
-				unset($input[$id]);
-			}
-			if($qty != 0){
-				DB::table('product_temp')->insert(
-		   	 		array('order' => Session::get('id'), 'id' => $id, 'qty' => $qty, 'page' => 'p3')
-				);
-			}
-		}*/
-
 		$items = Session::Get('p3_items');
 		$p3_cat = Session::get('p3_cat');
 
@@ -477,6 +438,8 @@ class OrderController extends \BaseController {
 
 		$id = Session::get('id');
 		$order = DB::table('orders_temp')->where('id', Session::get('id'))->get();
+
+		
 
 		return View::make('orders.review')->withOrder($order)->withId($id);
 
