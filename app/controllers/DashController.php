@@ -20,14 +20,29 @@ class DashController extends \BaseController {
 	 */
 	public function dashboard()
 	{
+		Session::forget('tables');
+		Session::forget('userdata');
+		Session::forget('p1_cat');
+		Session::forget('p1_items');
+		Session::forget('p2_items');
+		Session::forget('p2_cat');
+		Session::forget('p3_items');
+		Session::forget('p3_cat');
+		Session::forget('id');
+		Session::forget('set_categories');
+		Session::forget('order_check');
+		Session::forget('p1_check');
+		Session::forget('p2_check');
+		Session::forget('p3_check');
+		
 		$tomorrow = date('m-d-Y', strtotime(' +1 day'));
-		$today = date('m-d-Y');
-
+		//  Get User Data
 		$name = Auth::user()->f_name;
 		$admin = Auth::user()->admin;
 		$id = Auth::id();
 		$territory = Auth::user()->territory;
-		$order_info = array();
+
+		// Gather Current Users Orders 
 		$order_check = DB::table('orders')
 						 ->where('username', Auth::user()
 												->username)
@@ -67,9 +82,7 @@ class DashController extends \BaseController {
 				->withOrder_count($order_count)
 				->withPending($pending)
 				->withPrinted($printed)
-				->withProcessed($processed)
-				->withTomorrow($tomorrow)
-				->withToday($today);
+				->withProcessed($processed);
 		}
 		elseif($admin === "NO")
 		{
@@ -82,7 +95,7 @@ class DashController extends \BaseController {
 				->withOrder_count($order_count)
 				->withPending($pending)
 				->withPrinted($printed)
-				->withProcessed($processed);;
+				->withProcessed($processed);
 		}
 		else
 		{
