@@ -43,6 +43,7 @@ class OrderController extends \BaseController {
 		Session::forget('p2_check');
 		Session::forget('p3_check');
 		Session::forget('final_check');
+		Session::forget('items');
 
 		return View::make('orders.form');
 	}

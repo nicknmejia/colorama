@@ -34,6 +34,7 @@ class DashController extends \BaseController {
 		Session::forget('p1_check');
 		Session::forget('p2_check');
 		Session::forget('p3_check');
+		Session::forget('items');
 		
 		$tomorrow = date('m-d-Y', strtotime(' +1 day'));
 		//  Get User Data
