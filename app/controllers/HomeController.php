@@ -17,6 +17,7 @@ class HomeController extends BaseController {
 
 	public function showWelcome()
 	{
+		Session::put('failure', 0);
 		return View::make('hello');
 	}
 
@@ -32,6 +33,7 @@ class HomeController extends BaseController {
 
 		//if the validator fails, redirect back to the form
 		if ($validator->fails()) {
+			Session::put('failure', 1);
 			return Redirect::to('login')
 				->withErrors($validator) //send back all errors to the login form
 				->withInput(Input::Except('pass')); // send back all the input so form is repopulated

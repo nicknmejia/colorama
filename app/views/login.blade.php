@@ -8,21 +8,23 @@
           <legend>Please log in</legend>
 
           <!-- Errors will display here -->
-
+          <?php
+          if(Session::get('failure') == 1){
+            ?>
           <p>
             {{ $errors->first('user') . "<br/>" }}
             {{ $errors->first('pass') . "<br/>" }}
           </p>
+          <?php
+          }
+          ?>
 
           <!--==========================-->
-
-          <label>
             <!--<input type="text" placeholder="Username" name="user"> -->
-            {{ Form::text('user', Input::old('user'), array('placeholder' => 'Username')) }}
+            <input placeholder="Username" name="user" type="text">
             <!--<input type="password" placeholder="Password" name="pass">-->
-            {{ Form::password('pass', array('placeholder' => 'Password')) }}
-            {{ Form::submit('Submit') }}
-          </label>
+            <input placeholder="Password" name="pass" type="password" value="">
+            <input type="submit" value="Submit">
         </fieldset>
     {{ Form::close() }}
   </div>
