@@ -41,10 +41,13 @@ Route::group(array('before' => 'auth'), function()
 	Route::post('/review', 'OrderController@review');
 	Route::post('/orders/organics', 'OrderController@organic');
 
-	// Temporary storage routes
+	// Non-resourced Temporary storage routes
 	Route::post('/orders/form-one', 'OrderController@store_temp');
 	Route::post('/orders/form-two', 'OrderController@store_temp_two');
 	Route::post('/orders/form-three', 'OrderController@store_temp_three');
+
+	// Non-resourced Order Management Routes
+	Route::post('/orders/order_display', 'OrderController@order_display');
 	
 	// RESTful routes!  Huzzah!
 	Route::resource('orders','OrderController');

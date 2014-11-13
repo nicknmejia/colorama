@@ -19,37 +19,32 @@
           </tr>
         </thead>
         <tbody>
+
+        @foreach($orders as $array_num => $object)
           <tr>
-            <td>1</td>
-            <td class="hide-for-small">08-16-2014 15:48:56</td>
-            <td>08/18/2014</td>
-            <td class="hide-for-small">Santa Ana</td>
-            <td>606</td>
-            <td>Processed</td>
-            <td><input type="submit" value="00"></td>
+            <td>{{{ $object->id }}}</td>
+            <td class="hide-for-small">{{{ $object->order_date }}}</td>
+            <td>{{{ $object->ship_date }}}</td>
+            <td class="hide-for-small">{{{ $object->s_name }}}</td>
+            <td>{{{ $object->s_num }}}</td>
+            <td>Status Goes Here</td>
+            <td>
+              {{ Form::open(array('action' => 'OrderController@show')) }}
+                {{ link_to_route('orders.show','Print Order', $object->id, ['class' => 'tiny button']) }}
+              {{ Form::close() }}
+            </td>
           </tr>
-          <tr>
-            <td>2</td>
-            <td class="hide-for-small">08-16-2014 16:49:26</td>
-            <td>08/18/2014</td>
-            <td class="hide-for-small">Marina Del Rey</td>
-            <td>6611</td>
-            <td>Printed</td>
-            <td><input type="submit" value="01"></td>
-          </tr>
-          <tr>
-            <td>3</td>
-            <td class="hide-for-small">08-17-2014 12:38:44</td>
-            <td>08/19/2014</td>
-            <td class="hide-for-small">Simi Valley</td>
-            <td>6640</td>
-            <td>Pending</td>
-            <td><input type="submit" value="02"></td>
-          </tr>
+        @endforeach
         </tbody>
       </table>
     </fieldset>
     </form>
   </div>
 
+
+{{{ var_dump($orders) }}}
+<br/>
+{{{var_dump($date)}}}
+<br/>
+{{{ var_dump($territory) }}}
 @stop

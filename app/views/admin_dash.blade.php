@@ -7,8 +7,8 @@
     <div class="large-5 columns">
       <br/>
       <h1>Welcome {{{ $user }}}</h1>
-      <p>Today's Date: 8/26/2014</p> <!-- Use PHP date function on this line -->
-      <p>Server Time: 11:59:22 A.M</p> <!-- Grab server time and echo it live -->
+      <p>Today's Date: {{{ date('m-d-Y') }}}</p> <!-- Use PHP date function on this line -->
+      <p>Server Time: {{{ date('h:i:s A') }}}</p> <!-- Grab server time and echo it live -->
     </div>
     <div class="large-7 columns">
         <div class="row centered">
@@ -29,7 +29,7 @@
       <legend>Your Tools</legend>
       <div class="row centered">
         <a href="{{ URL::to('orders/create') }}"><div class="small-12 medium-4 large-4 columns"><i class="fi-pencil"></i><br/>Place an Order</div></a>
-        <a href="{{ URL::to('orders/show') }}"><div class="small-12 medium-4 large-4 columns"><i class="fi-magnifying-glass"></i><br/>View Your Orders</div></a>
+        <a href="{{ URL::to('orders') }}"><div class="small-12 medium-4 large-4 columns"><i class="fi-magnifying-glass"></i><br/>View Your Orders</div></a>
         <a href="{{ URL::to('users') }}"><div class="small-12 medium-4 large-4 columns"><i class="fi-torsos-all"></i><br/>Edit Accounts</div></a>
       </div>
       <div class="row centered">
@@ -95,4 +95,6 @@
 <!-- End Order List -->
 <br/>
 {{{ var_dump(Session::all()) }}}
+{{{ date('m-d-Y') }}}
+{{{ date('m-d-Y', strtotime(' +1 day')) }}}
 @stop

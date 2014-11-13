@@ -35,7 +35,7 @@
           </li>
           
           <li class="toggle-topbar menu-icon">
-            <a href=""><span>Menu</span></a>
+            <a href="{{ URL::to('logout') }}">Logout</a>
           </li>
         
         </ul>

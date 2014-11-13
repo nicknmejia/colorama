@@ -2,22 +2,16 @@
 
 class OrderController extends \BaseController {
 
-
-
-
 	/**
-	 * Display a new something.  I don't think I need the index route.
+	 * Display the page for order management options
 	 *
+	 * @param  int  $id
 	 * @return Response
 	 */
 	public function index()
 	{
-	
+		return View::make('orders.manage');
 	}
-
-
-
-
 
 
 
@@ -201,7 +195,7 @@ class OrderController extends \BaseController {
 		'sname'	    => 'required',
 		'snum'      => 'required|numeric',
 		'territory' => 'required',
-		'date'      => 'required|date'
+		'date'      => 'required|date_format:"m-d-Y"'
 	);
 
 		$messages = array(
@@ -516,6 +510,26 @@ class OrderController extends \BaseController {
 
 
 	/**
+	 * Display the page for order management options
+	 *
+	 * @param  int  $id
+	 * @return Response
+	 */
+	public function order_display()
+	{
+		$date = $_POST['date'];
+		$territory = $_POST['territory'];
+
+		$orders = DB::table('orders')
+						->where('ship_date','=', $date)
+						->where('territory','=', $territory)
+						->get();
+
+		return View::make('orders.view_orders')->withOrders($orders)->withDate($date)->withTerritory($territory);
+	}
+
+
+	/**
 	 * Display the current users orders
 	 *
 	 * @param  int  $id
@@ -523,7 +537,7 @@ class OrderController extends \BaseController {
 	 */
 	public function show($id)
 	{
-		return View::make('orders.view_orders');
+		return View::make('orders.order')->withId($id);
 	}
 
 
