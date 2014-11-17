@@ -36,12 +36,21 @@
           <div class="field" id="racks">Racks:</div>
         </div>
 
-        <div class="body">
+        
           @foreach($categories as $array_num => $object)
+          <?php
+            $items_to_total = array();
+            foreach($items as $array_num2 => $object2){
+              if($object2->category == $object[0]->table){
+                array_push($items_to_total, $object2->qty);
+              }
+            }
+            $total = array_sum($items_to_total);
+          ?>
           <div class="item-section">
             <div class="items-head">
               <span class="item-label">{{{ $object[0]->name }}}</span>
-              <span class="item-total">Total - 26</span>
+              <span class="item-total">Total - {{{ $total }}}</span>
             </div>
             <div class="item-body">
               @foreach($items as $array_num2 => $object2)
@@ -52,14 +61,6 @@
             </div>
           </div>
           @endforeach
-        </div>
-
         
-
-
-<br/>
-{{{ var_dump($items) }}}
-<br/>
-{{{ var_dump($categories) }}}
 
 @stop

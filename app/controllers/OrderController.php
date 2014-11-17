@@ -571,6 +571,8 @@ class OrderController extends \BaseController {
 			array_push($categories, DB::table('categories')->where('table','=',$object)->get());
 		}
 
+		DB::table('orders')->where('id','=', $id)->increment('progress', 1, array('print' => 1));
+
 		return View::make('orders.order')
 						->withId($id)
 						->withOrder($order)

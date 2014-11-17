@@ -27,7 +27,13 @@
             <td>{{{ $object->ship_date }}}</td>
             <td class="hide-for-small">{{{ $object->s_name }}}</td>
             <td>{{{ $object->s_num }}}</td>
-            <td>Status Goes Here</td>
+            <td>
+              @if($object->print == 0)
+              Unprinted
+              @elseif($object->print == 1)
+              Printed
+              @endif
+            </td>
             <td>
               {{ Form::open(array('action' => 'OrderController@show')) }}
                 {{ link_to_route('orders.show','Print Order', $object->id, ['class' => 'tiny button']) }}
