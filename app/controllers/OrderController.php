@@ -26,9 +26,12 @@ class OrderController extends \BaseController {
 		Session::forget('userdata');
 		Session::forget('p1_cat');
 		Session::forget('p1_items');
+		Session::forget('p1_items_final');
 		Session::forget('p2_items');
+		Session::forget('p2_items_final');		
 		Session::forget('p2_cat');
 		Session::forget('p3_items');
+		Session::forget('p3_items_final');
 		Session::forget('p3_cat');
 		Session::forget('id');
 		Session::forget('set_categories');
@@ -86,7 +89,9 @@ class OrderController extends \BaseController {
 						'snum',
 						'territory',
 						'date',
-						'sinstruct');
+						'sinstruct',
+						'store_type',
+						'po');
 
 		Session::put('userdata',$userdata);
 
@@ -236,6 +241,8 @@ class OrderController extends \BaseController {
     			  'timestamp'  => date('m-d-Y H:i:s'),
     			  's_instruct' => $userdata['sinstruct'],
     			  'email'      => $userdata['email'],
+    			  'store_type' => $userdata['store_type'],
+    			  'po' 		   => $userdata['po'],
     			  'username'   => Auth::user()->username)
 
             );
@@ -252,6 +259,8 @@ class OrderController extends \BaseController {
     			  'timestamp'  => date('m-d-Y H:i:s'),
     			  's_instruct' => $userdata['sinstruct'],
     			  'email'      => $userdata['email'],
+    			  'store_type' => $userdata['store_type'],
+    			  'po' 		   => $userdata['po'],
     			  'username'   => Auth::user()->username)
 		);
 		Session::put('id', $id);
@@ -287,15 +296,17 @@ class OrderController extends \BaseController {
 
 		if(Session::get('p1_check') == 1){
 			DB::table('product_temp')->where('page', '=', 'p1')->where('order', '=', Session::get('id'))->delete();
+			Session::forget('p1_items_final');
 		}
 
 
-		$items = Session::Get('p1_items');
+		$items = Session::get('p1_items');
 		$p1_cat = Session::get('p1_cat');
 
 		foreach($items as $array_pos => $array2){
 		      $num_of_rows = count($items[$array_pos]);
 		      for($i = 0;$i < $num_of_rows;$i++){
+		      	
 		      	if(Input::get($items[$array_pos][$i]->id) != ''){
 		        	$items[$array_pos][$i]->qty = Input::get($items[$array_pos][$i]->id);
 		        	DB::table('product_temp')->insert(
@@ -318,7 +329,7 @@ class OrderController extends \BaseController {
 
 		$p2_cat = Session::get('p2_cat');
 		$p2_items = Session::get('p2_items');
-		Session::put('p1_items', $items);
+		Session::put('p1_items_final', $items);
 		Session::put('p1_check', 1);
 		return View::make('orders.form-two')
 						->withP2_cat($p2_cat)
@@ -345,6 +356,7 @@ class OrderController extends \BaseController {
 
 		if(Session::get('p2_check') == 1){
 			DB::table('product_temp')->where('page', '=', 'p2')->where('order', '=', Session::get('id'))->delete();
+			Session::forget('p2_items_final');
 		}
 
 		$items = Session::Get('p2_items');
@@ -375,7 +387,7 @@ class OrderController extends \BaseController {
 		
 		$p3_cat = Session::get('p3_cat');
 		$p3_items = Session::get('p3_items');
-		Session::put('p2_items', $items);
+		Session::put('p2_items_final', $items);
 		Session::put('p2_check', 1);
 		return View::make('orders.form-three')
 						->withP3_cat($p3_cat)
@@ -400,6 +412,7 @@ class OrderController extends \BaseController {
 
 		if(Session::get('p3_check') == 1){
 			DB::table('product_temp')->where('page', '=', 'p3')->where('order', '=', Session::get('id'))->delete();
+			Session::forget('p3_items_final');
 		}
 
 		$items = Session::Get('p3_items');
@@ -428,7 +441,7 @@ class OrderController extends \BaseController {
 		      next($p3_cat);
 	    }
 
-	    Session::put('p3_items', $items);
+	    Session::put('p3_items_final', $items);
 		Session::put('p3_check', 1);
 
 		$id = Session::get('id');
@@ -468,6 +481,8 @@ class OrderController extends \BaseController {
     			  'timestamp'  => date('m-d-Y H:i:s'),
     			  's_instruct' => $order[0]->s_instruct,
     			  'email'      => $order[0]->email,
+    			  'store_type' => $order[0]->store_type,
+    			  'po'         => $order[0]->po,
     			  'username'   => $order[0]->username
 		));
 
@@ -537,7 +552,15 @@ class OrderController extends \BaseController {
 	 */
 	public function show($id)
 	{
-		return View::make('orders.order')->withId($id);
+		$order = DB::table('orders')->where('id','=',$id)->get();
+		$items = DB::table('product')->where('order','=',$id)->get();
+		$categories = DB::table('categories')->get();
+
+		return View::make('orders.order')
+						->withId($id)
+						->withOrder($order)
+						->withItems($items)
+						->withCategories($categories);
 	}
 
 

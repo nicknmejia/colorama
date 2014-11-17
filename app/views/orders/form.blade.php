@@ -35,9 +35,13 @@
 	  </div>
 	  <div class="large-3 columns">
     <input type="text" id="datepicker" placeholder="Date" name="date" id="date" value="{{ Input::old('date') }}">
+    <p>Store Type:</p>
+    <input type="radio" id="hd" name="store_type" value="hd">Home Depot &nbsp;&nbsp;&nbsp;
+    <input type="radio" id="doit" name="store_type" value="doit">Do-It
   </div>
 	  <div class="large-3 columns">
 	    <textarea placeholder="Special Instructions" name="sinstruct" id="sinstruct" value="{{ Input::old('sinstruct') }}"></textarea>
+	    <input type="text" placeholder="P.O.#" name="po" id="po" value="{{ Input::old('po') }}">
 	    
 	  </div>
 	  <div class="large-12 columns">

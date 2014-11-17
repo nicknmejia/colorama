@@ -1,0 +1,50 @@
+/* @page {
+  size: A4;
+  margin: 0;
+}
+@media print {
+  html, body {
+    width: 210mm;
+    height: 297mm;
+  }
+  
+
+}
+
+*/
+
+.wrapper{
+	width: 960px;
+	margin: 0 auto;
+}
+
+.header{
+	border: 1px black solid;
+	border-radius: 20px;
+	padding: 5px;
+
+}
+
+.store, .section_1, .section_2{
+	display: inline-block;
+	margin: auto;
+}
+
+.section_2{
+	float: right;
+}
+
+.store_info{
+	max-height: 50%;
+}
+
+.store{
+	font-size: 40px;
+}
+
+.hd{
+	font-size: 92px;
+	padding: 0px 20px;
+
+	margin: 0px;
+}

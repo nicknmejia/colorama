@@ -24,9 +24,12 @@ class DashController extends \BaseController {
 		Session::forget('userdata');
 		Session::forget('p1_cat');
 		Session::forget('p1_items');
+		Session::forget('p1_items_final');
 		Session::forget('p2_items');
+		Session::forget('p2_items_final');		
 		Session::forget('p2_cat');
 		Session::forget('p3_items');
+		Session::forget('p3_items_final');
 		Session::forget('p3_cat');
 		Session::forget('id');
 		Session::forget('set_categories');
@@ -34,6 +37,7 @@ class DashController extends \BaseController {
 		Session::forget('p1_check');
 		Session::forget('p2_check');
 		Session::forget('p3_check');
+		Session::forget('final_check');
 		Session::forget('items');
 		
 		$tomorrow = date('m-d-Y', strtotime(' +1 day'));

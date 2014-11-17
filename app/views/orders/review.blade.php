@@ -30,7 +30,7 @@
       </div>
 
       <div class="large-4 columns">
-        <textarea placeholder="Special Instructions" rows="5" value="{{{ $order[0]->s_instruct }}}"></textarea>
+        <textarea placeholder="Special Instructions" rows="5">{{{ $order[0]->s_instruct }}}</textarea>
       </div>
     </div>
     <div class="row centered">
@@ -49,7 +49,7 @@
      
 
       @foreach(Session::get('p1_cat') as $name => $table)
-        @if(!empty(Session::get('p1_items')[$count1]))
+        @if(!empty(Session::get('p1_items_final')[$count1]))
           <div class="large-6 columns">
           <label for="{{{$table}}}">{{{ $name }}}</label>
           <table class="large-12 columns" id="{{{$table}}}">
@@ -60,7 +60,7 @@
                 <th>Qty</th>
               </tr>
             </thead>
-            @foreach(Session::get('p1_items')[$count1] as $item)
+            @foreach(Session::get('p1_items_final')[$count1] as $item)
               <tr>
                 <td>{{{ $item->id }}}</td>
                 <td>{{{ $item->description }}}</td>
@@ -74,7 +74,7 @@
       @endforeach
 
       @foreach(Session::get('p2_cat') as $name => $table)
-        @if(!empty(Session::get('p2_items')[$count2]))
+        @if(!empty(Session::get('p2_items_final')[$count2]))
           <div class="large-6 columns">
           <label for="{{{$table}}}">{{{ $name }}}</label>
           <table class="large-12 columns" id="{{{$table}}}">
@@ -85,7 +85,7 @@
                 <th>Qty</th>
               </tr>
             </thead>
-            @foreach(Session::get('p2_items')[$count2] as $item)
+            @foreach(Session::get('p2_items_final')[$count2] as $item)
               <tr>
                 <td>{{{ $item->id }}}</td>
                 <td>{{{ $item->description }}}</td>
@@ -99,7 +99,7 @@
       @endforeach
 
       @foreach(Session::get('p3_cat') as $name => $table)
-        @if(!empty(Session::get('p3_items')[$count3]))
+        @if(!empty(Session::get('p3_items_final')[$count3]))
           <div class="large-6 columns">
           <label for="{{{$table}}}">{{{ $name }}}</label>
           <table class="large-12 columns" id="{{{$table}}}">
@@ -110,7 +110,7 @@
                 <th>Qty</th>
               </tr>
             </thead>
-            @foreach(Session::get('p3_items')[$count3] as $item)
+            @foreach(Session::get('p3_items_final')[$count3] as $item)
               <tr>
                 <td>{{{ $item->id }}}</td>
                 <td>{{{ $item->description }}}</td>

@@ -1,6 +1,13 @@
 ﻿$('.table').hide();
+$('#po').hide();
 
+$('#doit').focus(function(){
+	$('#po').show("fast");
+})
 
+$('#hd').focus(function(){
+	$('#po').hide("fast");
+})
 
 
 $( "#checkbox1" ).change(function() {

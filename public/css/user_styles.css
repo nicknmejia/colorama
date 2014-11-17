@@ -71,3 +71,24 @@ div.ui-datepicker{
 .errors li{
 	color:red;
 }
+
+.order{
+	height: 150px;
+	padding: 0px;
+}
+
+.hd{
+	font-size: 96px;
+	margin: 0;
+}
+
+
+.store-info{
+height: 75px;
+padding: 0;
+}
+
+.store{
+	font-size: 50px;
+	margin-left: 30px;
+}
