@@ -85,11 +85,12 @@ class UserController extends \BaseController {
 		));*/
 
 			DB::table('users')->insert(array(
-			    array('f_name' => 'taylor@example.com',
-			    	  'l_name' => 0,
+			    array('f_name' => $input['f_name'],
+			    	  'l_name' => $input['l_name'],
 			    	  'email' => $input['email'],
 			    	  'username' => $input['user'],
-			    	  'password' => Hash::make($input['pass']))
+			    	  'password' => Hash::make($input['pass']),
+			    	  'admin' => 'NO')
 			));
 
 			return View::make('admin.info')->withInput($input);
