@@ -554,7 +554,22 @@ class OrderController extends \BaseController {
 	{
 		$order = DB::table('orders')->where('id','=',$id)->get();
 		$items = DB::table('product')->where('order','=',$id)->get();
-		$categories = DB::table('categories')->get();
+		$categories = array();
+		$categories_to_use = array();
+		$current = $items[0]->category;
+		array_push($categories_to_use, $items[0]->category);
+
+		foreach($items as $array_num => $object){
+			if($current != $object->category){
+				array_push($categories_to_use, $object->category);
+			}
+			$current = $object->category;
+
+		}
+
+		foreach($categories_to_use as $array_num => $object){
+			array_push($categories, DB::table('categories')->where('table','=',$object)->get());
+		}
 
 		return View::make('orders.order')
 						->withId($id)

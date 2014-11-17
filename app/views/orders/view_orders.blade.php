@@ -41,10 +41,4 @@
     </form>
   </div>
 
-
-{{{ var_dump($orders) }}}
-<br/>
-{{{var_dump($date)}}}
-<br/>
-{{{ var_dump($territory) }}}
 @stop
