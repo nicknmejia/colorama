@@ -27,7 +27,7 @@
       <legend>Your Tools</legend>
       <div class="row centered">
         <a href="{{ URL::to('orders/create') }}"><div class="small-12 medium-4 large-4 columns"><i class="fi-pencil"></i><br/>Place an Order</div></a>
-        <a href="{{ URL::to('orders/show') }}"><div class="small-12 medium-4 large-4 columns"><i class="fi-magnifying-glass"></i><br/>View Your Orders</div></a>
+        <a href="{{ URL::to('orders') }}"><div class="small-12 medium-4 large-4 columns"><i class="fi-magnifying-glass"></i><br/>View Your Orders</div></a>
         <a href="{{ URL::to('users/' . $id . '/edit') }}"><div class="small-12 medium-4 large-4 columns"><i class="fi-torso"></i><br/>Edit Profile</div></a>
       </div>
     </fieldset>
@@ -85,8 +85,6 @@
     </form>
   </div>
 
-  <br/>
-{{{ var_dump($order_check) }}}
 <br/>
 {{{ var_dump(Session::all()) }}}
 @stop

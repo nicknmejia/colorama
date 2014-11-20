@@ -532,15 +532,29 @@ class OrderController extends \BaseController {
 	 */
 	public function order_display()
 	{
-		$date = $_POST['date'];
-		$territory = $_POST['territory'];
+		if(Auth::user()->admin == "YES"){
+			$date = $_POST['date'];
+			$territory = $_POST['territory'];
 
-		$orders = DB::table('orders')
-						->where('ship_date','=', $date)
-						->where('territory','=', $territory)
-						->get();
+			$orders = DB::table('orders')
+							->where('ship_date','=', $date)
+							->where('territory','=', $territory)
+							->get();
 
-		return View::make('orders.view_orders')->withOrders($orders)->withDate($date)->withTerritory($territory);
+			return View::make('orders.view_orders')->withOrders($orders)->withDate($date)->withTerritory($territory);
+		}
+		elseif(Auth::user()->admin == "NO"){
+			$date = $_POST['date'];
+			$user = Auth::user()->username;
+
+			$orders = DB::table('orders')
+							->where('ship_date','=', $date)
+							->where('username','=', $user)
+							->get();
+
+			return View::make('orders.view_orders')->withOrders($orders)->withDate($date);
+		}
+
 	}
 
 
@@ -571,8 +585,10 @@ class OrderController extends \BaseController {
 			array_push($categories, DB::table('categories')->where('table','=',$object)->get());
 		}
 
-		DB::table('orders')->where('id','=', $id)->increment('progress', 1, array('print' => 1));
-
+		if(Auth::user()->admin == "YES"){
+			DB::table('orders')->where('id','=', $id)->update(array('print' => 1, 'progress' => 1));
+		}
+		
 		return View::make('orders.order')
 						->withId($id)
 						->withOrder($order)

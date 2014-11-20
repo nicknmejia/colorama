@@ -9,7 +9,10 @@ class AvailController extends \BaseController {
 	 */
 	public function index()
 	{
-		return View::make('avail.avail_printout');
+		$categories = DB::table('categories')->get();
+
+		return View::make('avail.availability')
+			->withCategories($categories);
 	}
 
 
@@ -53,9 +56,13 @@ class AvailController extends \BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function edit($territory)
+	public function edit($category)
 	{
-		//
+		$items = DB::table($category)->get();
+
+		return View::make('avail.avail_edit')
+						->withItems($items)
+						->withCategory($category);
 	}
 
 
@@ -65,7 +72,7 @@ class AvailController extends \BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update($territory)
+	public function update($category)
 	{
 		//
 	}

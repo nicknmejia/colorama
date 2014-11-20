@@ -14,7 +14,7 @@
             <th width="" class="hide-for-small">Store</th>
             <th width="">Store #</th>
             <th width="" class="hide-for-medium-up">Processed</th>
-            <th width="">Edit</th>
+            <th width=""></th>
 
           </tr>
         </thead>
@@ -35,9 +35,17 @@
               @endif
             </td>
             <td>
-              {{ Form::open(array('action' => 'OrderController@show')) }}
-                {{ link_to_route('orders.show','Print Order', $object->id, ['class' => 'tiny button']) }}
-              {{ Form::close() }}
+              @if(Auth::user()->admin == "YES")
+                {{ Form::open(array('action' => 'OrderController@show')) }}
+                  {{ link_to_route('orders.show','Print Order', $object->id, ['class' => 'tiny button']) }}
+                {{ Form::close() }}
+
+              @elseif(Auth::user()->admin == "NO")
+                {{ Form::open(array('action' => 'OrderController@show')) }}
+                  {{ link_to_route('orders.show','View Order', $object->id, ['class' => 'tiny button']) }}
+                {{ Form::close() }}
+
+              @endif
             </td>
           </tr>
         @endforeach
