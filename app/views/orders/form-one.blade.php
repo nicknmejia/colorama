@@ -28,15 +28,15 @@
           <table class="large-12 columns table" id="{{{ $category }}}-click">
             <thead>
               <tr>
-                <th>Item Number</th>
                 <th>Description</th>
+                <th width="70">Rating</th>
                 <th>Qty</th>
               </tr>
             </thead>
               @for($i = 0; $i < count($p1_items[$c]); $i++)
               <tr>
-                <td>{{{ $p1_items[$c][$i]->id }}}</td>
                 <td>{{{ $p1_items[$c][$i]->description }}}</td>
+                <td>{{{ $p1_items[$c][$i]->rating }}}</td>
                 <td><input type="text" name="{{{ $p1_items[$c][$i]->id }}}"></td>
               </tr>
             @endfor
