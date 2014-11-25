@@ -7,8 +7,8 @@
     <ul class="breadcrumbs bar-push">
       <li class="current">Order Form</li>
       <li class="unavailable">Part One</li>
-      <li class="unavailable">Order Form</li>
-      <li class="unavailable">Order Form</li>
+      <li class="unavailable">Part Two</li>
+      <li class="unavailable">Part Three</li>
       <li class="unavailable">Review Order</li>
       <li class="unavailable">Confirmation</li>
     </ul>

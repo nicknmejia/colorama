@@ -74,7 +74,10 @@ class AvailController extends \BaseController {
 	 */
 	public function update($category)
 	{
-		//
+		$input = Input::all();
+
+		return View::make('avail.test_data')
+						->withInput($input);
 	}
 
 

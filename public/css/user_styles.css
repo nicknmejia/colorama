@@ -1,5 +1,4 @@
 
-
 .bar-push{
 	margin-top:70px;
 }
@@ -90,4 +89,14 @@ padding: 0;
 .store{
 	font-size: 50px;
 	margin-left: 30px;
+}
+
+/* Styles Specific to Availability Functions */
+
+.on{
+	color: limegreen;
+}
+
+.off{
+	color: red;
 }
