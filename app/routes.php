@@ -48,6 +48,9 @@ Route::group(array('before' => 'auth'), function()
 
 	// Non-resourced Order Management Routes
 	Route::post('/orders/order_display', 'OrderController@order_display');
+
+	// Non-resourced Availability Routes
+	Route::post('/availability/update', 'AvailController@avail_update');
 	
 	// RESTful routes!  Huzzah!
 	Route::resource('orders','OrderController');

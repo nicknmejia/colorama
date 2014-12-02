@@ -3,14 +3,15 @@
 
 <!-- Start Availability Functions -->
 <div id="info" class="row bar-push">
+  <div class="row centered">{{{ Session::get('message') }}}</div>
     <fieldset>
     <legend>Add an Item</legend>
     <div id="result"></div>
-    <form class="insert_item"><!-- This insert item function will work using AJAX.  Most of it's functionality will be copied from the organic form -->
+    {{ Form::open(array('action' => 'AvailController@store')) }}
       <table class="large-12 columns">
         <tr>
               <td><label for="item">Category</label></td>
-              <td><select id="size">
+              <td><select id="size" name="category">
                 <!-- Make sure the values of each option is the SPECIFIC TABLE NAME IN YOUR SQL DATABASE -->
                 
                 @foreach($categories as $array => $object)
@@ -25,14 +26,19 @@
           </tr>
 
           <tr>
+              <td><label for="rating">Rating</label></td>
+              <td><input id="rating" name="rating" type="text"/></td>
+          </tr>
+
+          <tr>
               <td><label for="qty">On/Off</label></td>
               <td>On&nbsp;<input type="radio" name="switch" value="1" checked>&nbsp;&nbsp;Off&nbsp;<input type="radio" name="switch" value="0"></td>
           </tr>
       </table>
       <!-- Don't forget to add this to your AJAX javascript file and create a PHP function for this -->
-      <div class="centered"><p class="button" id="item_submit">Submit Item</p></div>
+      <div class="centered">{{ Form::submit() }}</p></div>
 
-      </form>
+      {{ Form::close() }}
     </fieldset>
   </div>
 

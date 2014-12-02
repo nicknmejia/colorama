@@ -84,7 +84,4 @@
     </fieldset>
     </form>
   </div>
-
-<br/>
-{{{ var_dump(Session::all()) }}}
 @stop

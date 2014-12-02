@@ -3,7 +3,7 @@
 
 
 
-{{ Form::open(array('action' => 'AvailController@update')) }}
+{{ Form::open(array('action' => 'AvailController@avail_update')) }}
 
 <div class="row">
 	<div>Update your items:</div>
@@ -32,13 +32,13 @@
 			</td>
 
 			<td>
-				<input type="radio" id="on"  name="s{{{ $object->id }}}" value="off"><label>On</label>
-				<input type="radio" id="off" name="s{{{ $object->id }}}" value="on"><label>Off</label>
+				<input type="radio" id="on"  name="s{{{ $object->id }}}" value="on"><label>On</label>
+				<input type="radio" id="off" name="s{{{ $object->id }}}" value="off"><label>Off</label>
 			</td>
 		</tr>
 		@endforeach
 	</table>
-	{{  Form::submit('Submit')	}}
+	{{ Form::submit() }}
 </div>
 
 {{ Form::close() }}

@@ -34,20 +34,22 @@ class AvailController extends \BaseController {
 	 */
 	public function store()
 	{
-		//
+
+		$input = Input::except('_token');
+		$last_id = DB::table($input['category'])->max('id');
+		$new_id = $last_id + 1;
+
+		DB::table($input['category'])->insert(
+				array('id' => $new_id,
+					  'description' => $input['name'],
+					  'qty' => $input['switch'],
+					  'rating' => $input['rating'])
+			);
+
+		return Redirect::to('availability')->with('message', 'Item Added Successful');
 	}
 
 
-	/**
-	 * Display the specified items from the availability.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function show($territory)
-	{
-		//
-	}
 
 
 	/**
@@ -60,11 +62,12 @@ class AvailController extends \BaseController {
 	{
 		$items = DB::table($category)->get();
 
+		Session::put('category', $category);
+
 		return View::make('avail.avail_edit')
 						->withItems($items)
 						->withCategory($category);
 	}
-
 
 	/**
 	 * Update the availability.
@@ -72,12 +75,45 @@ class AvailController extends \BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update($category)
+	public function avail_update()
 	{
-		$input = Input::all();
+		$input = Input::except('_token','$object->id');
 
-		return View::make('avail.test_data')
-						->withInput($input);
+		foreach($input as $array => $object)
+		{
+			if(substr($array,0,1)==='r')
+			{
+				if(!empty($object))
+				{
+					DB::table(Session::get('category'))->where('id',substr($array,1))->update(array('rating' => strtoupper($object)));
+				}
+				else
+				{
+				}
+			}
+			elseif(substr($array,0,1)==='s')
+			{
+				if(!empty($object))
+				{
+
+					if($object === "on")
+					{
+						DB::table(Session::get('category'))->where('id',substr($array,1))->update(array('qty' => 1));
+					}
+					elseif($object === "off")
+					{
+						DB::table(Session::get('category'))->where('id',substr($array,1))->update(array('qty' => 0));
+					}
+				}
+				else
+				{
+				}
+			}
+		}
+
+		Session::forget('category');
+
+		return Redirect::to('availability')->with('message', 'Update Successful');
 	}
 
 

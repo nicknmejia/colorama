@@ -93,8 +93,4 @@
     </form>
   </div>
 <!-- End Order List -->
-<br/>
-{{{ var_dump(Session::all()) }}}
-{{{ date('m-d-Y') }}}
-{{{ date('m-d-Y', strtotime(' +1 day')) }}}
 @stop
