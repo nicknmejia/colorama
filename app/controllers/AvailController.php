@@ -81,7 +81,19 @@ class AvailController extends \BaseController {
 
 		foreach($input as $array => $object)
 		{
-			if(substr($array,0,1)==='r')
+			
+			if(substr($array,0,1)==='n')
+			{
+				$current_item = DB::table(Session::get('category'))->where('id',substr($array,1))->get();
+				if($current_item != $object)
+				{
+					DB::table(Session::get('category'))->where('id',substr($array,1))->update(array('description' => $object));
+				}
+				else
+				{
+				}
+			}
+			elseif(substr($array,0,1)==='r')
 			{
 				if(!empty($object))
 				{

@@ -20,7 +20,7 @@
 		<tr>
 			<input type="hidden" value="$object->id" name="$object->id">
 			<td class="hide-for-small">{{{ $object->id }}}</td>
-			<td><input type="text" value="{{{ $object->description }}}" name="n{{{ $object->id }}}"></td>
+			<td><input type="text" value="{{{ $object->description }}}" name="n{{{ $object->id }}}" tabindex="1"></td>
 			<td>{{{ $object->rating }}}</td>
 			@if($object->qty == 0)
 			<td class="off">OFF</td>
