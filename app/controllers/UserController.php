@@ -10,9 +10,15 @@ class UserController extends \BaseController {
 	public function index()
 	{
 		// 1. Add key that checks if user has admin privelages
+		if(Auth::user()->admin != 'YES'){
+			return Redirect::to('dashboard');
+		}
 
 		// 2. if(admin_is_set) Return list of users
-		return View::make('admin.edit_users');
+
+		$users = DB::table('users')->get();
+
+		return View::make('admin.edit_users')->withUsers($users);
 
 		// 2. else reroute user to dashboard
 	}
