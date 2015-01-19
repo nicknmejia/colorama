@@ -112,8 +112,7 @@ class UserController extends \BaseController {
 	 */
 	public function show($id)
 	{
-		// Show users profile before edit
-		// You will need to create a new view for this
+		
 	}
 
 
@@ -125,13 +124,23 @@ class UserController extends \BaseController {
 	 */
 	public function edit($id)
 	{
-		// 1. Select current logged in user ID.  Check ID against ID to edit.
+		
+		if(Auth::user()->admin != 'YES'){
+			if(Auth::user()->id != $id){
+				return Redirect::to('dashboard');
+			}
+		}
+	
+		$user = DB::table('users')->where('id',$id)->get();
+
+		Session::put('id', $user[0]->id);
 
 		// 2. if(ID_matches) return form for editing profile
 
-		return View::make('admin.edit_profile');
+		return View::make('admin.edit_profile')->withUser($user);
 
 		// 2. else reroute user to dashboard
+
 	}
 
 
@@ -143,7 +152,34 @@ class UserController extends \BaseController {
 	 */
 	public function update($id)
 	{
-		// Update user info!
+		$id = Session::pull('id');
+
+		$input = Input::only('username',
+							 'f_name',
+							 'l_name',
+							 'email',
+							 'territory',
+							 'admin');
+
+		DB::table('users')
+            ->where('id', $id)
+            ->update(array('username' => $input['username'],
+            			   'f_name' => $input['f_name'],
+            			   'l_name' => $input['l_name'],
+            			   'email' => $input['email'],
+            			   'territory' => $input['territory'],
+            			   'admin' => $input['admin']));
+
+
+
+		if(Auth::user()->admin != 'YES'){
+			if(Auth::user()->id != $id){
+				return Redirect::to('dashboard');
+			}
+		}
+
+
+		return Redirect::to('users');
 	}
 
 

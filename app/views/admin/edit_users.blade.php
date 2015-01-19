@@ -26,7 +26,7 @@
             <td>{{ $object->l_name }}</td>
             <td>{{ $object->email }}</td>
             <td>{{ $object->admin }}</td>
-            <td><input type="submit" value="Edit"></td>
+            <td>{{ link_to_route('users.edit','Edit User', $object->id, ['class' => 'tiny button']) }}</td>
           </tr>
           @endforeach
         </tbody>
@@ -34,5 +34,7 @@
     </fieldset>
     </form>
   </div>
+
+{{ var_dump(Session::all()) }}
 
 @stop
